@@ -49,7 +49,7 @@ def parse(url):
                 for data2 in data1.find_all('span',{'class':'a-list-item'}):
                     desc_list.append(data2.text)
 
-            except TypeError:
+            except TypeError or ValueError:
                 continue
 
 
@@ -75,8 +75,9 @@ def parse(url):
 
 
 
+
 def detail(request):
-    asin = pd.read_csv('asin.csv')
+    asin = pd.read_csv('asinn.csv')
     for i in asin:
         form1 = forms.form_newProductDetail()
         form2 = forms.form_oldProductDetail()
@@ -86,7 +87,7 @@ def detail(request):
             data1['asin']=i
 
         except TypeError:
-            continue 
+            continue
 
         data1['form1']=form1
         data1['form2']=form2
@@ -112,9 +113,9 @@ def detail(request):
 
 
 
-            with open('asin.csv', 'r') as fin:
+            with open('asinn.csv', 'r') as fin:
                 data = fin.read().splitlines(True)
-            with open('asin.csv', 'w') as fout:
+            with open('asinn.csv', 'w') as fout:
                 fout.writelines(data[1:])
             return HttpResponseRedirect('/detail')
 
