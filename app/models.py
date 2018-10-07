@@ -28,9 +28,10 @@ class newProductDetail(models.Model):
 
 
 class oldProductDetail(models.Model):
-    old_title = models.CharField(max_length=1000,blank=True, null=True)
-    title = models.ForeignKey('newProductDetail', on_delete=models.CASCADE,null=True)
     asin = models.CharField(max_length=10000, blank=True, null=True)
+    current_Title = models.CharField(max_length=1000,blank=True, null=True)
+    revised_Title = models.CharField(max_length=1000,blank=True, null=True)
+
 
     def __str__(self):
-	    return self.title
+	    return self.asin

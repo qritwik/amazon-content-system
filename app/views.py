@@ -73,20 +73,30 @@ def detail(request):
     asin = pd.read_csv('asin.csv')
     for i in asin:
         form1 = forms.form_newProductDetail()
+        form2 = forms.form_oldProductDetail()
         url = "http://www.amazon.in/dp/"+i
         data1 = parse(url)
         data1['asin']=i
         data1['form1']=form1
+        data1['form2']=form2
+
 
 
 
         if request.method == 'POST':
-            print("form1 post")
+            newtitle = request.POST.get('newtitle')
             form1 = forms.form_newProductDetail(request.POST)
-            if form1.is_valid():
+            form2 = forms.form_oldProductDetail(request.POST)
+            if form1.is_valid() and form2.is_valid():
                 obj = form1.save(commit=False)
                 obj.asin=i
                 obj.save()
+
+                obj1 = form2.save(commit=False)
+                obj1.asin=i
+                obj1.current_Title=data1['NAME']
+                obj1.revised_Title=form1.cleaned_data['title']
+                obj1.save()
 
 
 
