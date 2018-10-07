@@ -30,6 +30,12 @@
     <script src="{% static "js/modernizr.js" %}"></script>
     <script src="{% static "js/pace.min.js" %}"></script>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script
+   src="https://code.jquery.com/jquery-3.3.1.min.js"
+   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+   crossorigin="anonymous"></script>
+
     <!-- favicons
     ================================================== -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -79,7 +85,7 @@
                 </h1>
 
                 <div class="home-content__buttons">
-                    <a href="{% url 'app:detail' %}" class="btn btn--stroke">
+                    <a href="{% url 'app:detail' %}" class="btn btn--stroke" id="btnSubmit">
                         Product Details
                     </a>
                     <a href="{% url 'admin:index' %}" class="btn btn--stroke" target="_blank">
@@ -128,6 +134,23 @@
 
     <!-- Java Script
     ================================================== -->
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+    $("#btnSubmit").click(function(){
+
+      swal("Loading...", "Fetching the best content for you..", "info", {
+     button: false,
+   }
+
+   );
+
+
+    });
+   });
+    </script>
+
+
     <script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
     <script src="{% static "js/plugins.js" %}"></script>
     <script src="{% static "js/main.js" %}"></script>

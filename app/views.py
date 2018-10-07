@@ -44,9 +44,15 @@ def parse(url):
             ORIGINAL_PRICE = ''.join(RAW_ORIGINAL_PRICE).strip() if RAW_ORIGINAL_PRICE else None
             AVAILABILITY = ''.join(RAw_AVAILABILITY).strip() if RAw_AVAILABILITY else None
 
-            data1 = soup.find('div',{'class':'a-section a-spacing-medium a-spacing-top-small'})
-            for data2 in data1.find_all('span',{'class':'a-list-item'}):
-                desc_list.append(data2.text)
+            try:
+                data1 = soup.find('div',{'class':'a-section a-spacing-medium a-spacing-top-small'})
+                for data2 in data1.find_all('span',{'class':'a-list-item'}):
+                    desc_list.append(data2.text)
+
+            except TypeError:
+                continue
+
+
 
             if not ORIGINAL_PRICE:
                 ORIGINAL_PRICE = SALE_PRICE
@@ -76,7 +82,12 @@ def detail(request):
         form2 = forms.form_oldProductDetail()
         url = "http://www.amazon.in/dp/"+i
         data1 = parse(url)
-        data1['asin']=i
+        try:
+            data1['asin']=i
+
+        except TypeError:
+            continue 
+
         data1['form1']=form1
         data1['form2']=form2
 
