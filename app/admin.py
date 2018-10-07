@@ -25,21 +25,6 @@ class UserproductForm(ImportExportModelAdmin):
 		return instance.title
 
 
-# class asinResource(resources.ModelResource):
-# 	class Meta:
-# 		model = asin
-#
-#
-# @admin.register(asin)
-# class UserasinForm(ImportExportModelAdmin):
-#
-#
-#
-# 	resource_class = asinResource
-#
-# 	def name(self, instance):
-# 		return instance.asin
-
 
 
 class oldProductDetailResource(resources.ModelResource):
