@@ -6,8 +6,12 @@ import requests
 import pandas as pd
 from . import forms
 from .models import *
-
 from bs4 import BeautifulSoup
+
+
+def index(request):
+    return render(request,'index.html')
+
 
 
 def parse(url):
@@ -84,7 +88,7 @@ def detail(request):
                 obj.asin=i
                 obj.save()
 
-                
+
 
 
             with open('asin.csv', 'r') as fin:
