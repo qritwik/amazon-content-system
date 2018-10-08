@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
+
+
+
+  </head>
+  <body style="background:#fafafa;">
+
+
+    <div class="ui attached menu" style="background:#84b049; height:7%;">
+  <div class="ui container">
+    <a class="item" style="color:#ffffff;">
+      <i class="home icon" style="color:#ffffff;"></i> Text Mercato
+    </a>
+    <a class="item" style="color:#ffffff;">
+      <i class="grid layout icon" style="color:#ffffff;"></i>Manager Dashboard
+    </a>
+
+  </div>
+
+  <div class="right item">
+     <a class="item" style="color:#ffffff;" href="{% url 'admin:index' %}" target="_blank">
+      <i class="server icon" style="color:#ffffff;"></i>Admin Pannel</a>
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+    <div class="ui container raised" style="margin-top:5.5%;">
+
+
+
+    <div class="ui grid">
+
+  <div class="column">
+    <div class="ui segment">
+
+      <div class="ui container">
+
+          <div class="ui three statistics">
+  <div class="statistic">
+    <div class="text value">
+      {{done_asin}}/{{total_asin}}
+    </div>
+    <div class="label">
+      No. of ASIN Submitted
+    </div>
+  </div>
+
+
+</div>
+
+
+
+      </div>
+
+
+
+      <hr>
+
+      <table class="ui selectable celled table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>No. of ASIN Completed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>4</td>
+
+      </tr>
+
+
+    </tbody>
+  </table>
+
+    </div>
+
+
+
+  </div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- <div style="background:#e0e0e0;">
+   <div class="ui center aligned container">
+
+     <div class="ui horizontal small divided link list">
+       <a class="item" href="#" style="color:#212121;">Contact Us</a>
+       <a class="item" href="#" style="color:#212121;">Terms and Conditions</a>
+     </div>
+   </div>
+ </div> -->
+
+
+ <footer style="position:fixed;bottom:0; width:100%;">
+   <div style="background:#e0e0e0;">
+      <div class="ui center aligned container">
+
+        <div class="ui horizontal small divided link list">
+          <a class="item" href="#" style="color:#212121; padding-top:10%; padding-bottom:10%;">Contact Us</a>
+          <a class="item" href="#" style="color:#212121; padding-top:10%; padding-bottom:10%;">Terms and Conditions</a>
+        </div>
+      </div>
+    </div>
+
+ </footer>
+
+  </body>
+</html>

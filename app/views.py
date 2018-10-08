@@ -13,6 +13,20 @@ def index(request):
     return render(request,'index.html')
 
 
+def manager(request):
+    data1 = asinDetail.objects.all()
+    total_asin = data1.count()
+
+    data2 = asinDetail.objects.filter(status=True)
+    done_asin = data2.count()
+
+    context = {
+        'total_asin':total_asin,
+        'done_asin':done_asin
+        }
+    return render(request,'manager.html',context=context)
+
+
 
 def parse(url):
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'}
@@ -77,8 +91,11 @@ def parse(url):
 
 
 def detail(request):
-    asin = pd.read_csv('asinn.csv')
-    for i in asin:
+    data2 = asinDetail.objects.filter(status=False)
+    for i in data2:
+        i = i.asin
+
+
         form1 = forms.form_newProductDetail()
         form2 = forms.form_oldProductDetail()
         url = "http://www.amazon.in/dp/"+i
@@ -91,6 +108,7 @@ def detail(request):
 
         data1['form1']=form1
         data1['form2']=form2
+        
 
 
 
@@ -99,6 +117,8 @@ def detail(request):
             newtitle = request.POST.get('newtitle')
             form1 = forms.form_newProductDetail(request.POST)
             form2 = forms.form_oldProductDetail(request.POST)
+            sendme = asinDetail.objects.get(asin=i)
+
             if form1.is_valid() and form2.is_valid():
                 obj = form1.save(commit=False)
                 obj.asin=i
@@ -110,13 +130,20 @@ def detail(request):
                 obj1.revised_Title=form1.cleaned_data['title']
                 obj1.save()
 
+                if sendme.status == False:
+                    sendme.status=True
+                    sendme.save()
 
 
 
-            with open('asinn.csv', 'r') as fin:
-                data = fin.read().splitlines(True)
-            with open('asinn.csv', 'w') as fout:
-                fout.writelines(data[1:])
+
+
+
+
+            # with open('asinn.csv', 'r') as fin:
+            #     data = fin.read().splitlines(True)
+            # with open('asinn.csv', 'w') as fout:
+            #     fout.writelines(data[1:])
             return HttpResponseRedirect('/detail')
 
         return render(request,'detail.html',context=data1)

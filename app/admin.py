@@ -10,6 +10,23 @@ from import_export import resources
 admin.site.site_header = "Amazon ASIN System";
 
 
+
+class asinDetailResource(resources.ModelResource):
+	class Meta:
+		model = asinDetail
+
+
+@admin.register(asinDetail)
+class asinForm(ImportExportModelAdmin):
+
+
+	resource_class = asinDetailResource
+
+	def name(self, instance):
+		return instance.asin
+
+
+
 class newProductDetailResource(resources.ModelResource):
 	class Meta:
 		model = newProductDetail
