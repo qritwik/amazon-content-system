@@ -15,6 +15,9 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 
+  <script type="text/javascript" src={% static "js/detail.js" %}></script>
+
+
 
 
 
@@ -69,6 +72,9 @@
 {{NAME}}
 </div>
 
+    <div class="ui section divider"></div>
+
+
 <div class="field">
   <h3><label style="color:#424242;">Description</label></h3>
 <!-- <textarea> -->
@@ -78,6 +84,17 @@
 </ul>
 
 {% endfor %}
+<!-- </textarea> -->
+</div>
+
+    <div class="ui section divider"></div>
+
+
+
+<div class="field">
+  <h3><label style="color:#424242;">Product Description</label></h3>
+<!-- <textarea> -->
+  {{PRODUCT_DESC}}
 <!-- </textarea> -->
 </div>
 
@@ -100,47 +117,190 @@
 
     <div class="field">
       <a class="ui green ribbon label">New description</a>
-      <label style="margin-top:2%;">Title</label>
+      <h4><label style="margin-top:2%;">Title</label></h4>
       {% render_field form1.title class="form-control" name="newtitle" placeholder="Samsung 59 cm (24 inches) HD Ready LED TV UA24J4100AR (Black) (2015 Model)" %}
 
     </div>
 
+    <div class="ui section divider"></div>
+
     <div class="field">
-      <label>Bullet Point 1</label>
-      {% render_field form1.bp1 class="form-control" placeholder="Resolution : HD Ready (1366x768p) | Refresh Rate: 60 hertz | Viewing Angle: 176 degrees" %}
+      <h4><label>Bullet Point 1 (Resolution and Refresh)</label></h4>
+      <div class="three fields">
+      <div class="field">
+        <input type="text" id="resolution" placeholder="Resolution:">
+      </div>
+      <div class="field">
+        <input type="text" id="refresh" placeholder="Refresh Rate:">
+      </div>
+      <div class="field">
+        <input type="text" id="view" placeholder="Viewing angle:">
+      </div>
+    </div>
+      {% render_field form1.bp1 class="form-control" placeholder="Resolution : HD Ready (1366x768p) | Refresh Rate: 60 hertz | Viewing Angle: 176 degrees" id="bp1" %}
 
     </div>
+    <div class="ui section divider"></div>
     <div class="field">
-      <label>Bullet Point 2</label>
-      {% render_field form1.bp2 class="form-control" placeholder="Resolution : HD Ready (1366x768p) | Refresh Rate: 60 hertz | Viewing Angle: 176 degrees" %}
+      <h4><label>Bullet Point 2 (Display)</label></h4>
+      <div class="five fields">
+      <div class="field">
+        <input type="text" id="ds1" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="ds2" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="ds3" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="ds4" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="ds5" placeholder="">
+      </div>
     </div>
-    <div class="field">
-      <label>Bullet Point 3</label>
-      {% render_field form1.bp3 class="form-control" placeholder="Resolution : HD Ready (1366x768p) | Refresh Rate: 60 hertz | Viewing Angle: 176 degrees" %}
+      {% render_field form1.bp2 class="form-control" placeholder="Display: 4K Ultra HDR | X-Motion Clarity | Triluminous Display | 4K X-Reality Pro | X-tended Dynamic Range" id="bp2" %}
     </div>
+
+    <div class="ui section divider"></div>
+
     <div class="field">
-      <label>Bullet Point 4</label>
-      {% render_field form1.bp4 class="form-control" placeholder="Resolution : HD Ready (1366x768p) | Refresh Rate: 60 hertz | Viewing Angle: 176 degrees" %}
+      <h4><label>Bullet Point 3 (Smart TV Features) Optional</label></h4>
+      <div class="ten fields">
+      <div class="field">
+        <input type="text" id="st1" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="st2" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="st3" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="st4" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="st5" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="st6" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="st7" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="st8" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="st9" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="st10" placeholder="">
+      </div>
     </div>
-    <div class="field">
-      <label>Bullet Point 5</label>
-      {% render_field form1.bp5 class="form-control" placeholder="Resolution : HD Ready (1366x768p) | Refresh Rate: 60 hertz | Viewing Angle: 176 degrees" %}
+      {% render_field form1.bp3 class="form-control" placeholder="Smart TV Features: Built-in WiFi | Linux-based OS | Youtube and Netflix Button | Smartphone Plug and Play" id="bp3"%}
     </div>
+      <div class="ui section divider"></div>
+
+
     <div class="field">
-      <label>Bullet Point 6</label>
-      {% render_field form1.bp6 class="form-control" placeholder="Resolution : HD Ready (1366x768p) | Refresh Rate: 60 hertz | Viewing Angle: 176 degrees" %}
+      <h4><label>Bullet Point 4 (Ports Connectivity)</label></h4>
+      <div class="three fields">
+      <div class="field">
+        <input type="number" id="hdmi" placeholder="No. of HDMI Port:">
+      </div>
+      <div class="field">
+        <input type="number" id="usb" placeholder="No. of USB Port:">
+      </div>
+      <div class="field">
+        <input type="number" id="vga" placeholder="No. of VGA Port:">
+      </div>
     </div>
-    <div class="field">
-      <label>Bullet Point 7</label>
-      {% render_field form1.bp7 class="form-control" placeholder="Resolution : HD Ready (1366x768p) | Refresh Rate: 60 hertz | Viewing Angle: 176 degrees" %}
+      {% render_field form1.bp4 class="form-control" placeholder="Connectivity: 2 HDMI ports to connect set top box, Blu Ray players, gaming console | 2 USB ports to connect hard drives and other USB devices | 1 VGA Port to connect laptops" id="bp4" %}
     </div>
+    <div class="ui section divider"></div>
+
     <div class="field">
-      <label>Bullet Point 8</label>
-      {% render_field form1.bp8 class="form-control" placeholder="Resolution : HD Ready (1366x768p) | Refresh Rate: 60 hertz | Viewing Angle: 176 degrees" %}
+      <h4><label>Bullet Point 5 (Sound)</label></h4>
+      <div class="five fields">
+      <div class="field">
+        <input type="text" id="s1" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="s2" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="s3" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="s4" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="s5" placeholder="">
+      </div>
     </div>
+
+      {% render_field form1.bp5 class="form-control" placeholder="Sound : 10 Watts Output | Dolby Digital Plus | 2.0 Channel Speakers with Down-firing and Bass Reflex" id="bp5"%}
+    </div>
+    <div class="ui section divider"></div>
+
     <div class="field">
-      <label>Comments</label>
-      {% render_field form1.comments class="form-control" placeholder="Resolution : HD Ready (1366x768p) | Refresh Rate: 60 hertz | Viewing Angle: 176 degrees" %}
+      <h4><label>Bullet Point 6 (Installation)</label></h4>
+      <div class="two fields">
+      <div class="field">
+        <input type="text" id="brand6" placeholder="Sony" value="{{BRAND}}" disabled>
+      </div>
+
+      <div class="field">
+        <input type="text" id="contact6" placeholder="1800-100-1302">
+      </div>
+    </div>
+      {% render_field form1.bp6 class="form-control" placeholder="Installation" id="bp6"%}
+    </div>
+    <div class="ui section divider"></div>
+
+    <div class="field">
+      <h4><label>Bullet Point 7 (Warranty)</label></h4>
+      <div class="two fields">
+      <div class="field">
+        <input type="number" id="year" placeholder="Warranty Year">
+      </div>
+
+      <div class="field">
+        <input type="text" id="brand" placeholder="Brand:" value="{{BRAND}}" disabled>
+      </div>
+    </div>
+      {% render_field form1.bp7 class="form-control" placeholder="Warranty: 1 year standard manufacturer warranty from Onida" id="bp7"%}
+    </div>
+    <div class="ui section divider"></div>
+
+    <div class="field">
+      <h4><label>Bullet Point 8 (Additional Information) Optional</label></h4>
+      <div class="five fields">
+      <div class="field">
+        <input type="text" id="a1" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="a2" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="a3" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="a4" placeholder="">
+      </div>
+      <div class="field">
+        <input type="text" id="a5" placeholder="">
+      </div>
+    </div>
+      {% render_field form1.bp8 class="form-control" placeholder="Additional Features: 8 GB Internal Memory | 1GB RAM" id="bp8"%}
+    </div>
+    <div class="ui section divider"></div>
+
+    <div class="field">
+      <h4><label>Comments</label></h4>
+      {% render_field form1.comments class="form-control" placeholder="Comments" %}
     </div>
 
 
@@ -149,13 +309,16 @@
     </div>
 <div class="ui center aligned container" style="margin:3%;">
     <div class="ui buttons btn1">
-    <button type="reset" class="ui red button">Reset</button>
-    <div class="or"></div>
-    <button type="submit" class="ui primary button" id="btnSubmit">Save and Continue</button>
+      <button type="submit" class="ui primary button" id="btnSubmit">Save and Continue</button>
+      <div class="or"></div>
+    </form>
+    <button type="text" class="ui green button" id="btn_click">Get Value</button>
+
+
 
   </div>
 </div>
-  </form>
+
 
   <div class="ui inverted vertical footer raised segment" style="background:#e0e0e0;">
    <div class="ui center aligned container">
@@ -167,20 +330,6 @@
    </div>
  </div>
 
- <script type="text/javascript">
- $(document).ready(function() {
- $("#btnSubmit").click(function(){
-
-   swal("Loading...", "Please wait while the script is loading..", "info", {
-  button: false,
-}
-
-);
-
-
- });
-});
- </script>
 
 
 

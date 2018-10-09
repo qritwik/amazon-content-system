@@ -63,6 +63,14 @@ def parse(url):
                 for data2 in data1.find_all('span',{'class':'a-list-item'}):
                     desc_list.append(data2.text)
 
+                data2 = soup.find('td',{'class':'value'})
+                brand = data2.text
+
+
+                data3 = soup.find('div',{'id':'productDescription'})
+                data4 = data3.find('p')
+                productDescription = data4.text
+
             except TypeError or ValueError:
                 continue
 
@@ -80,7 +88,9 @@ def parse(url):
                     'ORIGINAL_PRICE':ORIGINAL_PRICE,
                     'AVAILABILITY':AVAILABILITY,
                     'URL':url,
-                    'DESC':desc_list
+                    'DESC':desc_list,
+                    'BRAND':brand,
+                    'PRODUCT_DESC':productDescription
                     }
 
             return data
@@ -108,7 +118,7 @@ def detail(request):
 
         data1['form1']=form1
         data1['form2']=form2
-        
+
 
 
 
