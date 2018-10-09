@@ -1,146 +1,104 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<!--[if lt IE 9 ]><html class="no-js oldie" lang="en"> <![endif]-->
-<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html class="no-js" lang="en">
-<!--<![endif]-->
-
+<html>
 <head>
-
-    <!--- basic page needs
-    ================================================== -->
-    <meta charset="utf-8">
-    <title>Amazon Asin System</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- mobile specific metas
-    ================================================== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSS
-    ================================================== -->
-    <link rel="stylesheet" href="{% static "css/base.css" %}">
-    <link rel="stylesheet" href="{% static "css/vendor.css" %}">
-    <link rel="stylesheet" href="{% static "css/main.css" %}">
-
-    <!-- script
-    ================================================== -->
-    <script src="{% static "js/modernizr.js" %}"></script>
-    <script src="{% static "js/pace.min.js" %}"></script>
-
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script
-   src="https://code.jquery.com/jquery-3.3.1.min.js"
-   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-   crossorigin="anonymous"></script>
-
-    <!-- favicons
-    ================================================== -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-    <style media="screen">
-
-    body,section.s-home{
-      background: #3CA55C;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #B5AC49, #3CA55C);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #B5AC49, #3CA55C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    <title>Login V2</title>
+    <meta charset="UTF-8">
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "fonts/font-awesome-4.7.0/css/font-awesome.min.css" %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "fonts/iconic/css/material-design-iconic-font.min.css" %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/animate/animate.css" %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/animsition/css/animsition.min.css" %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/select2/select2.min.css" %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/daterangepicker/daterangepicker.css" %}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "css/util.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+<!--===============================================================================================-->
 
 
-
-
-    }
-
-    </style>
 
 </head>
+<body>
 
-<body id="top">
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form">
+                    <span class="login100-form-title p-b-26">
+                        Welcome
+                    </span>
+                    <span class="login100-form-title p-b-48">
+                      <div class="logo">
+      <a href='http://www.textmercato.com/'><img src="http://www.textmercato.com/newimages/logo.png" alt="" style="margin:30px auto 0 auto; display:block;" /></a>
+    </div>
+                    </span>
 
-    <!-- header
-    ================================================== -->
+                    <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+                        <input class="input100" type="text" name="email">
+                        <span class="focus-input100" data-placeholder="Email"></span>
+                    </div>
 
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        <input class="input100" type="password" name="pass">
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
 
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <a class="login100-form-btn" href="{% url "app:detail" %}">
+                                Login
+                            </a>
+                        </div>
+                    </div>
 
-    <!-- home
-    ================================================== -->
-    <section class="s-home target-section" data-parallax="scroll" style="margin-top:-5.5%;">
+                    <div class="text-center p-t-115">
+                        <span class="txt1">
+                            Don’t have an account?
+                        </span>
 
-        <!-- <div class="overlay"></div>
-        <div class="shadow-overlay"></div> -->
-
-        <div class="home-content">
-
-            <div class="row home-content__main">
-
-                <h3>Welcome to Text Mercato</h3>
-
-                <h1>
-                    We are a creative group <br>
-                    of people who design <br>
-                    influential brands and <br>
-                    digital experiences.
-                </h1>
-
-                <div class="home-content__buttons">
-                    <a href="{% url 'app:detail' %}" class="btn btn--stroke" id="btnSubmit">
-                        Product Details
-                    </a>
-                    <a href="{% url 'admin:index' %}" class="btn btn--stroke" target="_blank">
-                        Admin
-                    </a>
-                </div>
-
-            </div>
-
-
-
-
-        </div> <!-- end home-content -->
-
-
-        <ul class="home-social">
-
-            <li>
-                <a href='https://www.linkedin.com/company/text-mercato-solutions-private-limited' target='_blank'><i class="fa fa-linkedin" aria-hidden="true"></i><span>Linkedin</span></a>
-            </li>
-
-        </ul>
-        <!-- end home-social -->
-
-    </section> <!-- end s-home -->
-
-
-    <!-- about
-    ================================================== -->
-
-
-    <!-- preloader
-    ================================================== -->
-    <div id="preloader">
-        <div id="loader">
-            <div class="line-scale-pulse-out">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                        <a class="txt2" href="#">
+                            Sign Up
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
 
-    <!-- Java Script
-    ================================================== -->
+    <div id="dropDownSelect1"></div>
 
-  
-
-    <script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
-    <script src="{% static "js/plugins.js" %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static "vendor/jquery/jquery-3.2.1.min.js" %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static "vendor/animsition/js/animsition.min.js" %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static "vendor/bootstrap/js/popper.js" %}"></script>
+    <script src="{% static "vendor/bootstrap/js/bootstrap.min.js" %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static "vendor/select2/select2.min.js" %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static "vendor/daterangepicker/moment.min.js" %}"></script>
+    <script src="{% static "vendor/daterangepicker/daterangepicker.js" %}"></script>
+<!--===============================================================================================-->
+    <script src="{% static "vendor/countdowntime/countdowntime.js" %}"></script>
+<!--===============================================================================================-->
     <script src="{% static "js/main.js" %}"></script>
 
 </body>
-
 </html>
