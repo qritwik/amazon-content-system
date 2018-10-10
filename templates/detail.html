@@ -37,8 +37,8 @@
       <i class="setting icon" style="color:#ffffff;"></i> ASIN: {{asin}}
     </a>
 
-    <a class="item" style="color:#ffffff;" href="{% url 'admin:index' %}" target="_blank">
-      <i class="server icon" style="color:#ffffff;"></i>Admin</a>
+    <!-- <a class="item" style="color:#ffffff;" href="{% url 'admin:index' %}" target="_blank">
+      <i class="server icon" style="color:#ffffff;"></i>Admin</a> -->
 
       <a class="item" style="color:#ffffff;" href="{{URL}}" target="_blank">
         <i class="external alternate icon" style="color:#ffffff;"></i>Link to product</a>
@@ -47,8 +47,12 @@
   </div>
 
   <div class="right item">
+
     <a class="item" style="color:#ffffff;" href="">
       <i class="user icon" style="color:#ffffff;"></i>{{name}}</a>
+
+      <a class="item" style="color:#ffffff;" href="{% url 'app:index' %}">
+        <i class="power off icon" style="color:#ffffff;"></i></a>
 
 
     </div>

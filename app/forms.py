@@ -13,3 +13,10 @@ class form_oldProductDetail(forms.ModelForm):
 	class Meta:
 		model = oldProductDetail
 		fields = '__all__'
+
+
+
+class form_empDetail(forms.ModelForm):
+	class Meta:
+		model = empDetail
+		fields = '__all__'

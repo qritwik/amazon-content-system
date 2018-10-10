@@ -27,6 +27,24 @@ class asinForm(ImportExportModelAdmin):
 
 
 
+class empDetailResource(resources.ModelResource):
+	class Meta:
+		model = empDetail
+
+
+@admin.register(empDetail)
+class empDetailForm(ImportExportModelAdmin):
+
+
+	resource_class = empDetailResource
+
+	def name(self, instance):
+		return instance.email
+
+
+
+
+
 class newProductDetailResource(resources.ModelResource):
 	class Meta:
 		model = newProductDetail

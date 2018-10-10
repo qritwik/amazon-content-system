@@ -14,7 +14,9 @@ import ast
 
 
 def index(request):
+    form5 = forms.form_empDetail()
     if(request.method=='POST'):
+        form5 = forms.form_empDetail(request.POST)
         email = request.POST.get('email1')
         password = request.POST.get('pass1')
 
@@ -39,8 +41,23 @@ def index(request):
         last_name = data2["data"]["last_name"]
         name = first_name+" "+last_name
         request.session['name'] = name
+        request.session['email'] = email
 
         roles = data2["data"]["roles"][0]
+        email = data2["data"]["email"]
+
+        if not empDetail.objects.get(email=email):
+            if form5.is_valid():
+                obj5 = form5.save(commit=False)
+                obj5.name=name
+                obj5.email=email
+                obj5.roles=roles
+                obj5.save()
+
+
+
+
+
 
 
 
@@ -149,7 +166,9 @@ def parse(url):
 
 def detail(request):
     name = request.session.get('name')
-    data2 = asinDetail.objects.filter(status=False)
+    email = request.session.get('email')
+
+    data2 = asinDetail.objects.filter(status=False).filter(email=email)
     for i in data2:
         i = i.asin
 
