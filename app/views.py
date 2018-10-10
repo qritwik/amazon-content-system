@@ -7,9 +7,47 @@ import pandas as pd
 from . import forms
 from .models import *
 from bs4 import BeautifulSoup
+import http.client
+import json
+import ast
+
 
 
 def index(request):
+    if(request.method=='POST'):
+        email = request.POST.get('email1')
+        password = request.POST.get('pass1')
+
+        conn = http.client.HTTPConnection("textmercato.com:4523")
+        payload = "email="+email+"&password="+password
+        headers = {
+                'authorization': "Basic YWRtaW4tZGV2OmFkbWluUGFzcy0tMTIz",
+                'content-type': "application/x-www-form-urlencoded",
+                'cache-control': "no-cache",
+                'postman-token': "5ac9f9ac-261e-c0ff-ee9b-65064632ba6e"
+                }
+
+        conn.request("POST", "/signin", payload, headers)
+
+        res = conn.getresponse()
+        data = res.read()
+
+        data1 = data.decode("utf-8")
+        data2 = ast.literal_eval(data1)
+        status = data2["status"]
+        first_name = data2["data"]["first_name"]
+        last_name = data2["data"]["last_name"]
+        name = first_name+" "+last_name
+        request.session['name'] = name
+
+
+
+        if status == "success":
+            return HttpResponseRedirect('/detail')
+        else:
+            return HttpResponseRedirect('/')
+
+
     return render(request,'index.html')
 
 
@@ -101,6 +139,7 @@ def parse(url):
 
 
 def detail(request):
+    name = request.session.get('name')
     data2 = asinDetail.objects.filter(status=False)
     for i in data2:
         i = i.asin
@@ -118,6 +157,8 @@ def detail(request):
 
         data1['form1']=form1
         data1['form2']=form2
+        data1['name']=name
+
 
 
 

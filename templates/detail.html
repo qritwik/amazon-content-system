@@ -33,19 +33,22 @@
     <a class="item" style="color:#ffffff;" style="font-size:40px;" href="{% url 'app:index' %}">
       <i class="home icon" style="color:#ffffff;"></i> Text Mercato
     </a>
-    <a class="item" style="color:#ffffff;">
+    <a class="item" style="color:#ffffff;" disabled>
       <i class="setting icon" style="color:#ffffff;"></i> ASIN: {{asin}}
     </a>
 
     <a class="item" style="color:#ffffff;" href="{% url 'admin:index' %}" target="_blank">
       <i class="server icon" style="color:#ffffff;"></i>Admin</a>
 
+      <a class="item" style="color:#ffffff;" href="{{URL}}" target="_blank">
+        <i class="external alternate icon" style="color:#ffffff;"></i>Link to product</a>
+
 
   </div>
 
   <div class="right item">
-    <a class="item" style="color:#ffffff;" href="{{URL}}" target="_blank">
-      <i class="external alternate icon" style="color:#ffffff;"></i>Link to product</a>
+    <a class="item" style="color:#ffffff;" href="">
+      <i class="user icon" style="color:#ffffff;"></i>{{name}}</a>
 
 
     </div>
