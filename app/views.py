@@ -10,6 +10,12 @@ from bs4 import BeautifulSoup
 import http.client
 import json
 import ast
+from django.db.models import F
+from django.db.models import Q
+
+
+def message(request):
+    return render(request,'message.html')
 
 
 
@@ -99,9 +105,18 @@ def manager(request):
     data2 = asinDetail.objects.filter(status=True)
     done_asin = data2.count()
 
+    data3 = empDetail.objects.filter(~Q(roles="admin"))
+    total_user = data3.count()
+
+
+
+
+
     context = {
         'total_asin':total_asin,
-        'done_asin':done_asin
+        'done_asin':done_asin,
+        'total_user':total_user,
+        'data3':data3
         }
     return render(request,'manager.html',context=context)
 
@@ -183,61 +198,68 @@ def detail(request):
     name = request.session.get('name')
     email = request.session.get('email')
 
-    data2 = asinDetail.objects.filter(status=False).filter(email=email)
-    for i in data2:
-        i = i.asin
+    if asinDetail.objects.filter(status=False).filter(email=email).exists():
+        data2 = asinDetail.objects.filter(status=False).filter(email=email)
+        for i in data2:
+            i = i.asin
 
 
-        form1 = forms.form_newProductDetail()
-        form2 = forms.form_oldProductDetail()
-        url = "http://www.amazon.in/dp/"+i
-        data1 = parse(url)
-        try:
-            data1['asin']=i
+            form1 = forms.form_newProductDetail()
+            form2 = forms.form_oldProductDetail()
+            url = "http://www.amazon.in/dp/"+i
+            data1 = parse(url)
+            try:
+                data1['asin']=i
 
-        except TypeError:
-            continue
+            except TypeError:
+                continue
 
-        data1['form1']=form1
-        data1['form2']=form2
-        data1['name']=name
-
-
-
-
-
-
-        if request.method == 'POST':
-            newtitle = request.POST.get('newtitle')
-            form1 = forms.form_newProductDetail(request.POST)
-            form2 = forms.form_oldProductDetail(request.POST)
-            sendme = asinDetail.objects.get(asin=i)
-
-            if form1.is_valid() and form2.is_valid():
-                obj = form1.save(commit=False)
-                obj.asin=i
-                obj.save()
-
-                obj1 = form2.save(commit=False)
-                obj1.asin=i
-                obj1.current_Title=data1['NAME']
-                obj1.revised_Title=form1.cleaned_data['title']
-                obj1.save()
-
-                if sendme.status == False:
-                    sendme.status=True
-                    sendme.save()
+            data1['form1']=form1
+            data1['form2']=form2
+            data1['name']=name
 
 
 
 
 
 
+            if request.method == 'POST':
+                newtitle = request.POST.get('newtitle')
+                form1 = forms.form_newProductDetail(request.POST)
+                form2 = forms.form_oldProductDetail(request.POST)
+                sendme = asinDetail.objects.get(asin=i)
 
-            # with open('asinn.csv', 'r') as fin:
-            #     data = fin.read().splitlines(True)
-            # with open('asinn.csv', 'w') as fout:
-            #     fout.writelines(data[1:])
-            return HttpResponseRedirect('/detail')
+                if form1.is_valid() and form2.is_valid():
+                    obj = form1.save(commit=False)
+                    obj.asin=i
+                    obj.save()
+
+                    obj1 = form2.save(commit=False)
+                    obj1.asin=i
+                    obj1.current_Title=data1['NAME']
+                    obj1.revised_Title=form1.cleaned_data['title']
+                    obj1.save()
+
+                    data7 = empDetail.objects.get(email=email)
+                    data7.asin_done_c = F('asin_done_c') + 1
+                    data7.save()
+
+                    if sendme.status == False:
+                        sendme.status=True
+                        sendme.save()
+
+
+
+
+
+
+
+                # with open('asinn.csv', 'r') as fin:
+                #     data = fin.read().splitlines(True)
+                # with open('asinn.csv', 'w') as fout:
+                #     fout.writelines(data[1:])
+                return HttpResponseRedirect('/detail')
 
         return render(request,'detail.html',context=data1)
+    else:
+        return HttpResponseRedirect('/message')

@@ -57,7 +57,7 @@
         </a>
         <a class="teal item">
           Users
-          <div class="ui label">51</div>
+          <div class="ui label">{{total_user}}</div>
         </a>
 
 
@@ -95,14 +95,18 @@
       <tr>
         <th>Name</th>
         <th>No. of ASIN Completed</th>
+        <th>Role</th>
       </tr>
     </thead>
     <tbody>
+      {% for i in data3 %}
       <tr>
-        <td>John</td>
-        <td>4</td>
+        <td>{{i.name}}</td>
+        <td>{{i.asin_done_c}}</td>
+        <td>{{i.roles}}</td>
 
       </tr>
+      {% endfor %}
 
 
     </tbody>
