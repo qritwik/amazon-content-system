@@ -40,10 +40,19 @@ def index(request):
         name = first_name+" "+last_name
         request.session['name'] = name
 
+        roles = data2["data"]["roles"][0]
+
+
 
 
         if status == "success":
-            return HttpResponseRedirect('/detail')
+            if roles == "admin":
+                return HttpResponseRedirect('/manager')
+            else:
+                return HttpResponseRedirect('/detail')
+
+
+
         else:
             return HttpResponseRedirect('/')
 

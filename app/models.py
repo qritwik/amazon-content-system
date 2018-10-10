@@ -36,3 +36,13 @@ class oldProductDetail(models.Model):
 
     def __str__(self):
 	    return self.asin
+
+
+class empDetail(models.Model):
+    name = models.CharField(max_length=10000, blank=True, null=True)
+    asin_done = models.CharField(max_length=1000,blank=True, null=True)
+    email = models.CharField(max_length=1000,blank=True, null=True)
+
+
+    def __str__(self):
+	    return self.asin
