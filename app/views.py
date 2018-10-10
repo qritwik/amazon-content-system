@@ -46,13 +46,28 @@ def index(request):
         roles = data2["data"]["roles"][0]
         email = data2["data"]["email"]
 
-        if not empDetail.objects.get(email=email):
+        try:
+            if empDetail.objects.get(email=email):
+                print("User already exists")
+
+            else:
+                if form5.is_valid():
+                    obj5 = form5.save(commit=False)
+                    obj5.name=name
+                    obj5.email=email
+                    obj5.roles=roles
+                    obj5.save()
+        except empDetail.DoesNotExist:
+            #user is visiting first time
             if form5.is_valid():
                 obj5 = form5.save(commit=False)
                 obj5.name=name
                 obj5.email=email
                 obj5.roles=roles
                 obj5.save()
+
+
+
 
 
 
