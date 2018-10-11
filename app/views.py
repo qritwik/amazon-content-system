@@ -46,7 +46,7 @@ def fetch_asin(request):
                     continue
 
                 if form1.is_valid():
-                    print("valid")
+                    print(i)
                     obj = form1.save(commit=False)
 
                     obj.old_name = data4['NAME']
