@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^detail/',views.detail,name="detail"),
     url(r'^manager/',views.manager,name="manager"),
     url(r'^message/',views.message,name="message"),
+    url(r'^fetch_asin',views.fetch_asin,name="fetch_asin"),
 
 
 

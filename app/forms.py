@@ -20,3 +20,10 @@ class form_empDetail(forms.ModelForm):
 	class Meta:
 		model = empDetail
 		fields = '__all__'
+
+
+
+class form_oldDetailAmazon(forms.ModelForm):
+	class Meta:
+		model = oldDetailAmazon
+		fields = '__all__'

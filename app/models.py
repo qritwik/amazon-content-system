@@ -6,6 +6,7 @@ class asinDetail(models.Model):
     asin = models.CharField(max_length=100, blank=True, null=True)
     status = models.BooleanField(default=False)
     email = models.CharField(max_length=100, blank=True, null=True)
+    extracted = models.BooleanField(default=False)
     def __str__(self):
 	    return self.asin
 
@@ -47,3 +48,16 @@ class empDetail(models.Model):
 
     def __str__(self):
 	    return self.email
+
+
+class oldDetailAmazon(models.Model):
+    old_name = models.CharField(max_length=10000, blank=True, null=True)
+    old_url = models.CharField(max_length=10000, blank=True, null=True)
+    old_desc = models.CharField(max_length=100000, blank=True, null=True)
+    old_brand = models.CharField(max_length=10000, blank=True, null=True)
+    old_product_desc = models.CharField(max_length=100000, blank=True, null=True)
+    asin = models.CharField(max_length=10000, blank=True, null=True)
+    status = models.BooleanField(default=False)
+
+    def __str__(self):
+	    return self.asin

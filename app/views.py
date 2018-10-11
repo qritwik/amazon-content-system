@@ -13,9 +13,74 @@ import ast
 from django.db.models import F
 from django.db.models import Q
 
+h=[]
+p=[]
+
 
 def message(request):
     return render(request,'message.html')
+
+
+def fetch_asin(request):
+    data1 = asinDetail.objects.all()
+    total_asin = data1.count()
+
+    data2 = asinDetail.objects.filter(extracted=True)
+    fetch_asin = data2.count()
+
+    form1 = forms.form_oldDetailAmazon()
+
+    if request.method == 'POST':
+        if asinDetail.objects.filter(extracted=False).exists():
+            data3 = asinDetail.objects.filter(extracted=False)
+            for i in data3:
+                form1 = forms.form_oldDetailAmazon(request.POST)
+                sendme = asinDetail.objects.get(asin=i)
+                i = i.asin
+                url = "http://www.amazon.in/dp/"+i
+                data4 = parse(url)
+                try:
+                    data4['asin']=i
+
+                except TypeError:
+                    continue
+
+                if form1.is_valid():
+                    print("valid")
+                    obj = form1.save(commit=False)
+
+                    obj.old_name = data4['NAME']
+                    obj.old_url = data4['URL']
+                    obj.old_desc = data4['DESC']
+                    obj.old_brand = data4['BRAND']
+                    obj.old_product_desc = data4['PRODUCT_DESC']
+                    obj.asin = i
+
+                    obj.save()
+
+                    if sendme.extracted == False:
+                        sendme.extracted=True
+                        sendme.save()
+                    return HttpResponseRedirect('/fetch_asin')
+                else:
+                    print(form1.errors)
+
+
+
+
+
+
+
+
+
+
+
+    context = {
+        'total_asin':total_asin,
+        'fetch_asin':fetch_asin
+    }
+
+    return render(request,'fetch_asin.html',context=context)
 
 
 
@@ -108,6 +173,11 @@ def manager(request):
     data3 = empDetail.objects.filter(~Q(roles="admin"))
     total_user = data3.count()
 
+    data4 = asinDetail.objects.filter(extracted=True)
+    asin_fetch = data4.count()
+
+
+
 
 
 
@@ -116,6 +186,7 @@ def manager(request):
         'total_asin':total_asin,
         'done_asin':done_asin,
         'total_user':total_user,
+        'asin_fetch':asin_fetch,
         'data3':data3
         }
     return render(request,'manager.html',context=context)
@@ -165,6 +236,22 @@ def parse(url):
                 data4 = data3.find('p')
                 productDescription = data4.text
 
+
+                # data5 = soup.find('div',{'id':'dpx-aplus-product-description_feature_div'})
+                # data6 = data5.find('div',{'id':'aplus_feature_div'})
+                # data7 = data6.find('div',{'class':'a-section a-spacing-extra-large bucket'})
+                # data8 = data7.find('div',{'class':'aplus-v2 desktop celwidget'})
+                # for data10 in data8.find_all('h4'):
+                #     h.append(data10.text)
+                # for data11 in data8.find_all('p'):
+                #     p.append(data11.text)
+
+
+
+
+
+
+
             except TypeError or ValueError:
                 continue
 
@@ -175,6 +262,8 @@ def parse(url):
             if not NAME :
                 raise ValueError('Product not found!')
 
+            # over = zip(h,p)
+
             data = {
                     'NAME':NAME,
                     'SALE_PRICE':SALE_PRICE,
@@ -184,7 +273,8 @@ def parse(url):
                     'URL':url,
                     'DESC':desc_list,
                     'BRAND':brand,
-                    'PRODUCT_DESC':productDescription
+                    'PRODUCT_DESC':productDescription,
+                    # 'OVER':over
                     }
 
             return data
@@ -193,73 +283,137 @@ def parse(url):
 
 
 
+#
+# def detail(request):
+#     name = request.session.get('name')
+#     email = request.session.get('email')
+#
+#     if asinDetail.objects.filter(status=False).filter(email=email).filter(extracted=True).exists():
+#         data2 = asinDetail.objects.filter(status=False, extracted=True, email=email)
+#         for i in data2:
+#             i = i.asin
+#             print(i)
+#             data3 = oldDetailAmazon.objects.get(asin=i)
+#             form1 = forms.form_newProductDetail()
+#             form2 = forms.form_oldProductDetail()
+#             context = {
+#                 'data3':data3,
+#                 'form1':form1,
+#                 'form2':form2,
+#                 'name':name
+#                 }
+#
+#             if request.method == 'POST':
+#                 newtitle = request.POST.get('newtitle')
+#                 form1 = forms.form_newProductDetail(request.POST)
+#                 form2 = forms.form_oldProductDetail(request.POST)
+#                 sendme = asinDetail.objects.get(asin=i)
+#
+#                 if form1.is_valid() and form2.is_valid():
+#                     obj = form1.save(commit=False)
+#                     obj.asin=i
+#                     obj.save()
+#
+#                     obj1 = form2.save(commit=False)
+#                     obj1.asin=i
+#                     obj1.current_Title=data3.old_name
+#                     obj1.revised_Title=form1.cleaned_data['title']
+#                     obj1.save()
+#
+#                     data7 = empDetail.objects.get(email=email)
+#                     data7.asin_done_c = F('asin_done_c') + 1
+#                     data7.save()
+#
+#                     if sendme.status == False:
+#                         sendme.status=True
+#                         sendme.save()
+#
+#
+#
+#
+#
+#
+#
+#
+#                 # with open('asinn.csv', 'r') as fin:
+#                 #     data = fin.read().splitlines(True)
+#                 # with open('asinn.csv', 'w') as fout:
+#                 #     fout.writelines(data[1:])
+#                 return HttpResponseRedirect('/detail')
+#
+#
+#
+#
+#         return render(request,'detail.html',context=context)
+#     else:
+#         return HttpResponseRedirect('/message')
+#
 
 def detail(request):
     name = request.session.get('name')
     email = request.session.get('email')
+    if asinDetail.objects.filter(email=email).filter(status=False).filter(extracted=True).exists():
 
-    if asinDetail.objects.filter(status=False).filter(email=email).exists():
-        data2 = asinDetail.objects.filter(status=False).filter(email=email)
-        for i in data2:
-            i = i.asin
+        data1 = asinDetail.objects.filter(email=email).filter(status=False).filter(extracted=True)
+        for i in data1:
+            asin = i.asin
 
+            if oldDetailAmazon.objects.filter(status=False).filter(asin=asin):
+                #---->>>><<<<<-----#
+                data2 = oldDetailAmazon.objects.get(asin=asin)
+                #---->>>><<<<<-----#
+                form1 = forms.form_newProductDetail()
+                form2 = forms.form_oldProductDetail()
 
-            form1 = forms.form_newProductDetail()
-            form2 = forms.form_oldProductDetail()
-            url = "http://www.amazon.in/dp/"+i
-            data1 = parse(url)
-            try:
-                data1['asin']=i
+                data4 = ast.literal_eval(data2.old_desc)
 
-            except TypeError:
-                continue
+                print(type(data2.old_desc))
 
-            data1['form1']=form1
-            data1['form2']=form2
-            data1['name']=name
+                context = {
+                    'data2':data2,
+                    'name':name,
+                    'data4':data4,
+                    'form1':form1,
+                    'form2':form2
 
-
-
-
-
-
-            if request.method == 'POST':
-                newtitle = request.POST.get('newtitle')
-                form1 = forms.form_newProductDetail(request.POST)
-                form2 = forms.form_oldProductDetail(request.POST)
-                sendme = asinDetail.objects.get(asin=i)
-
-                if form1.is_valid() and form2.is_valid():
-                    obj = form1.save(commit=False)
-                    obj.asin=i
-                    obj.save()
-
-                    obj1 = form2.save(commit=False)
-                    obj1.asin=i
-                    obj1.current_Title=data1['NAME']
-                    obj1.revised_Title=form1.cleaned_data['title']
-                    obj1.save()
-
-                    data7 = empDetail.objects.get(email=email)
-                    data7.asin_done_c = F('asin_done_c') + 1
-                    data7.save()
-
-                    if sendme.status == False:
-                        sendme.status=True
-                        sendme.save()
+                    }
+                if request.method == 'POST':
+                    newtitle = request.POST.get('newtitle')
+                    form1 = forms.form_newProductDetail(request.POST)
+                    form2 = forms.form_oldProductDetail(request.POST)
+                    sendme = asinDetail.objects.get(asin=asin)
+                    sendme1 = oldDetailAmazon.objects.get(asin=asin)
 
 
 
+                    if form1.is_valid() and form2.is_valid():
+                        obj = form1.save(commit=False)
+                        obj.asin=asin
+                        obj.save()
+
+                        obj1 = form2.save(commit=False)
+                        obj1.asin=i
+                        obj1.current_Title=data2.old_name
+                        obj1.revised_Title=form1.cleaned_data['title']
+                        obj1.save()
+
+                        data7 = empDetail.objects.get(email=email)
+                        data7.asin_done_c = F('asin_done_c') + 1
+                        data7.save()
+
+                        if sendme.status == False:
+                            sendme.status=True
+                            sendme.save()
+
+                        if sendme1.status == False:
+                            sendme1.status=True
+                            sendme1.save()
+                        return HttpResponseRedirect('/detail')
 
 
 
 
-                # with open('asinn.csv', 'r') as fin:
-                #     data = fin.read().splitlines(True)
-                # with open('asinn.csv', 'w') as fout:
-                #     fout.writelines(data[1:])
-                return HttpResponseRedirect('/detail')
 
-        return render(request,'detail.html',context=data1)
+                return render(request,'detail.html',context=context)
     else:
         return HttpResponseRedirect('/message')

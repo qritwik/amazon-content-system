@@ -10,6 +10,8 @@ from import_export import resources
 admin.site.site_header = "Amazon ASIN System";
 
 
+admin.site.register(oldDetailAmazon)
+
 
 class asinDetailResource(resources.ModelResource):
 	class Meta:

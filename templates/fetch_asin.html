@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Fetch ASIN</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
+
+    <script
+   src="https://code.jquery.com/jquery-3.3.1.min.js"
+   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+   crossorigin="anonymous"></script>
+
+  </head>
+  <body style="background:#fafafa;">
+
+
+
+        <div class="ui attached menu" style="background:#84b049; height:7%;">
+      <div class="ui container">
+        <a class="item" style="color:#ffffff;">
+          <i class="home icon" style="color:#ffffff;"></i> Text Mercato
+        </a>
+        <a class="item" style="color:#ffffff;">
+          <i class="grid layout icon" style="color:#ffffff;"></i>Manager Dashboard / Fetch ASIN
+        </a>
+
+      </div>
+
+      <div class="right item">
+
+
+          <a class="item" style="color:#ffffff;" href="{% url 'app:index' %}">
+            <i class="power off icon" style="color:#ffffff;"></i></a>
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+<form method="post">
+  {% csrf_token %}
+
+<div class="ui container" style="margin-top:6%;">
+
+
+
+<div class="ui attached segment">
+
+  <div class="ui container">
+
+      <div class="ui two statistics">
+<div class="statistic">
+<div class="text value">
+  {{fetch_asin}}/{{total_asin}}
+</div>
+<div class="label">
+  No. of ASIN Fetched
+</div>
+</div>
+
+
+
+</div>
+
+
+
+  </div>
+  <div class="ui section divider"></div>
+
+  <div class="ui active inverted dimmer">
+      <div class="ui large text loader">Fetching Data from Server</div>
+    </div>
+
+
+  <button type="submit" id="modal" class="fluid ui button teal" id="btnSubmit" tabindex="0">Fetch Data</button>
+
+
+</div>
+</div>
+
+
+</form>
+
+
+<footer style="position:fixed;bottom:0; width:100%;">
+  <div style="background:#e0e0e0;">
+     <div class="ui center aligned container">
+
+       <div class="ui horizontal small divided link list">
+         <a class="item" href="#" style="color:#212121; padding-top:10%; padding-bottom:10%;">Contact Us</a>
+         <a class="item" href="#" style="color:#212121; padding-top:10%; padding-bottom:10%;">Terms and Conditions</a>
+       </div>
+     </div>
+   </div>
+
+</footer>
+
+<script>
+jQuery(function(){
+   jQuery('#modal').click();
+});
+</script>
+
+
+
+
+  </body>
+</html>

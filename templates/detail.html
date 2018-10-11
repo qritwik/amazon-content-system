@@ -34,13 +34,13 @@
       <i class="home icon" style="color:#ffffff;"></i> Text Mercato
     </a>
     <a class="item" style="color:#ffffff;" disabled>
-      <i class="setting icon" style="color:#ffffff;"></i> ASIN: {{asin}}
+      <i class="setting icon" style="color:#ffffff;"></i> ASIN: {{data2.asin}}
     </a>
 
     <!-- <a class="item" style="color:#ffffff;" href="{% url 'admin:index' %}" target="_blank">
       <i class="server icon" style="color:#ffffff;"></i>Admin</a> -->
 
-      <a class="item" style="color:#ffffff;" href="{{URL}}" target="_blank">
+      <a class="item" style="color:#ffffff;" href="{{data2.old_url}}" target="_blank">
         <i class="external alternate icon" style="color:#ffffff;"></i>Link to product</a>
 
 
@@ -76,7 +76,7 @@
 
 <h3><label style="color:#424242;">Title</label></h3>
 <!-- <input type="text" name="title" value="{{NAME}}" disabled> -->
-{{NAME}}
+{{data2.old_name}}
 </div>
 
     <div class="ui section divider"></div>
@@ -85,7 +85,7 @@
 <div class="field">
   <h3><label style="color:#424242;">Description</label></h3>
 <!-- <textarea> -->
-{% for i in DESC %}
+{% for i in data4 %}
 <ul>
   <li>{{i}}</li>
 </ul>
@@ -101,9 +101,20 @@
 <div class="field">
   <h3><label style="color:#424242;">Product Description</label></h3>
 <!-- <textarea> -->
-  {{PRODUCT_DESC}}
+  {{data2.old_product_desc}}
 <!-- </textarea> -->
 </div>
+
+<!-- <div class="ui section divider"></div> -->
+
+<!-- <div class="field">
+  {% for h,p in OVER %}
+  <h3><label style="color:#424242;">{{h}}</label></h3>
+  <p>{{p}}</p>
+  {% endfor %}
+</div> -->
+
+
 
 </form>
       </div>
@@ -256,7 +267,7 @@
       <h4><label>Bullet Point 6 (Installation)</label></h4>
       <div class="two fields">
       <div class="field">
-        <input type="text" id="brand6" placeholder="Sony" value="{{BRAND}}" disabled>
+        <input type="text" id="brand6" placeholder="Sony" value="{{data2.old_brand}}" disabled>
       </div>
 
       <div class="field">
@@ -275,7 +286,7 @@
       </div>
 
       <div class="field">
-        <input type="text" id="brand" placeholder="Brand:" value="{{BRAND}}" disabled>
+        <input type="text" id="brand" placeholder="Brand:" value="{{data2.old_brand}}" disabled>
       </div>
     </div>
       {% render_field form1.bp7 class="form-control" placeholder="Warranty: 1 year standard manufacturer warranty from Onida" id="bp7"%}

@@ -52,12 +52,16 @@
       <div class="four wide column segment">
         <div class="ui large vertical menu">
         <a class="teal item">
-          ASIN's
+          ASIN's Done
           <div class="ui teal left label">{{done_asin}}</div>
         </a>
         <a class="teal item">
           Users
           <div class="ui label">{{total_user}}</div>
+        </a>
+        <a class="teal item" href="{% url 'app:fetch_asin' %}">
+          Asin's Fetched
+          <div class="ui label">{{asin_fetch}}</div>
         </a>
 
 
