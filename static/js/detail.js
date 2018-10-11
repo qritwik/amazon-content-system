@@ -1,15 +1,5 @@
 $(document).ready(function() {
 
-$("#btnSubmit").click(function(){
-
-  swal("Loading...", "Please wait while the script is loading..", "info", {
- button: false,
-}
-
-);
-
-
-});
 
 
 $("#btn_click").click(function(){
