@@ -4,7 +4,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Admin</title>
+    <title>Manager-User</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
 
@@ -20,7 +20,7 @@
       <i class="home icon" style="color:#ffffff;"></i> Text Mercato
     </a>
     <a class="item" style="color:#ffffff;">
-      <i class="grid layout icon" style="color:#ffffff;"></i>Manager Dashboard
+      <i class="grid layout icon" style="color:#ffffff;"></i>Manager Dashboard - {{data3.name}}
     </a>
 
   </div>
@@ -49,24 +49,9 @@
 
     <div class="ui grid">
 
-      <div class="four wide column segment">
-        <div class="ui large vertical menu">
-        <a class="teal item">
-          ASIN's Done
-          <div class="ui teal left label">{{done_asin}}</div>
-        </a>
-        <a class="teal item">
-          Users
-          <div class="ui label">{{total_user}}</div>
-        </a>
-        <a class="teal item" href="{% url 'app:fetch_asin' %}">
-          Asin's Fetched
-          <div class="ui label">{{asin_fetch}}</div>
-        </a>
+      <h1>{{data3.name}}</h1>
 
 
-      </div>
- </div>
 
   <div class="twelve wide stretched column">
     <div class="ui segment">
@@ -99,18 +84,22 @@
       <tr>
         <th>Name</th>
         <th>No. of ASIN Completed</th>
+        <th>No. of ASIN Given</th>
         <th>Role</th>
+
       </tr>
     </thead>
     <tbody>
-      {% for i in data3 %}
+
       <tr>
-        <td><a href="/user/{{i.email}}">{{i.name}}</a></td>
-        <td>{{i.asin_done_c}}</td>
-        <td>{{i.roles}}</td>
+        <td>{{data3.name}}</td>
+        <td>{{done_asin}}</td>
+        <td>{{total_asin}}</td>
+
+        <td>{{data3.roles}}</td>
 
       </tr>
-      {% endfor %}
+
 
 
     </tbody>

@@ -17,6 +17,32 @@ h=[]
 p=[]
 
 
+def manager_user(request,email):
+    email=email
+
+    data1 = asinDetail.objects.filter(email=email)
+    total_asin = data1.count()
+
+    data2 = asinDetail.objects.filter(email=email).filter(status=True)
+    done_asin = data2.count()
+
+    data3 = empDetail.objects.get(email=email)
+
+    context = {
+        'email':email,
+        'total_asin':total_asin,
+        'done_asin':done_asin,
+        'data3':data3
+    }
+
+
+
+    return render(request,'manager_user.html',context=context)
+
+
+
+
+
 def message(request):
     return render(request,'message.html')
 

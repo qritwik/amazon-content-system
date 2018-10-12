@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^manager/',views.manager,name="manager"),
     url(r'^message/',views.message,name="message"),
     url(r'^fetch_asin',views.fetch_asin,name="fetch_asin"),
+    url(r'^user/(?P<email>[\w\-\.\@\w]+)$',views.manager_user,name="manager_user"),
+
 
 
 
