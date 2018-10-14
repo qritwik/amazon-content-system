@@ -35,6 +35,22 @@ def manager_user(request,email):
         'data3':data3
     }
 
+    if request.method == 'POST':
+        c=0
+        user_asin_c = request.POST.get('user_asin')
+        user_asin_c_n = int(user_asin_c)
+
+        data1 = asinDetail.objects.filter(status=False).filter(extracted=True).filter(email="")
+        for i1 in data1:
+            if(c<user_asin_c_n):
+                i1.email = email
+                i1.save()
+                c=c+1
+            else:
+                c=0
+                return HttpResponseRedirect('/user/'+email)
+
+
 
 
     return render(request,'manager_user.html',context=context)

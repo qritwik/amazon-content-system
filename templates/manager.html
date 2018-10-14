@@ -8,29 +8,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
 
-
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
 
   </head>
   <body style="background:#fafafa;">
 
 
-    <div class="ui attached menu" style="background:#84b049; height:7%;">
+    <div class="ui attached menu" style="background:#f5f5f5; height:7%;">
   <div class="ui container">
-    <a class="item" style="color:#ffffff;">
-      <i class="home icon" style="color:#ffffff;"></i> Text Mercato
+    <a class="item" style="color:#212121;">
+      <i class="home icon" style="color:#212121;"></i> Text Mercato
     </a>
-    <a class="item" style="color:#ffffff;">
-      <i class="grid layout icon" style="color:#ffffff;"></i>Manager Dashboard
+    <a class="item" style="color:#212121;">
+      <i class="grid layout icon" style="color:#212121;"></i>Manager Dashboard
     </a>
 
   </div>
 
   <div class="right item">
-     <a class="item" style="color:#ffffff;" href="{% url 'admin:index' %}" target="_blank">
-      <i class="server icon" style="color:#ffffff;"></i>Admin Pannel</a>
+     <a class="item" style="color:#212121;" href="{% url 'admin:index' %}" target="_blank">
+      <i class="server icon" style="color:#212121;"></i>Admin Pannel</a>
 
-      <a class="item" style="color:#ffffff;" href="{% url 'app:index' %}">
-        <i class="power off icon" style="color:#ffffff;"></i></a>
+      <a class="item" style="color:#212121;" href="{% url 'app:index' %}">
+        <i class="power off icon" style="color:#212121;"></i></a>
 
 
 

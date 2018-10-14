@@ -4,9 +4,9 @@ from django.db import models
 
 class asinDetail(models.Model):
     asin = models.CharField(max_length=100, blank=True, null=True)
-    status = models.BooleanField(default=False)
+    status = models.BooleanField(default=False, blank=True)
     email = models.CharField(max_length=100, blank=True, null=True)
-    extracted = models.BooleanField(default=False)
+    extracted = models.BooleanField(default=False, blank=True)
     def __str__(self):
 	    return self.asin
 
