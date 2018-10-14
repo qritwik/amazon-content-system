@@ -225,7 +225,7 @@ def manager(request):
     data5 = asinDetail.objects.filter(~Q(email=""))
     asin_allocated = data5.count()
 
-    
+
 
 
 
@@ -429,6 +429,13 @@ def detail(request):
 
                 data4 = ast.literal_eval(data2.old_desc)
 
+                #---->>>><<<<<-----#
+                data5 = empDetail.objects.get(email=email)
+                data6 = asinDetail.objects.filter(email=email)
+                total_asin_allocated = data6.count()
+
+                #---->>>><<<<<-----#
+
                 print(type(data2.old_desc))
 
                 context = {
@@ -436,7 +443,9 @@ def detail(request):
                     'name':name,
                     'data4':data4,
                     'form1':form1,
-                    'form2':form2
+                    'form2':form2,
+                    'total_asin_allocated':total_asin_allocated,
+                    'data5':data5
 
                     }
                 if request.method == 'POST':

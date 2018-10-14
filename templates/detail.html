@@ -28,7 +28,7 @@
 
 
 
-    <div class="ui attached fixed stackable menu" style="background:#84b049; height:7%;">
+    <div class="ui fixed menu" style="background:#0081d3; height:7%;">
   <div class="ui container">
     <a class="item" style="color:#ffffff;" style="font-size:40px;" href="{% url 'app:index' %}">
       <i class="home icon" style="color:#ffffff;"></i> Text Mercato
@@ -51,8 +51,15 @@
     <a class="item" style="color:#ffffff;" href="">
       <i class="user icon" style="color:#ffffff;"></i>{{name}}</a>
 
+
+      <a class="item" style="color:#ffffff;">
+        {{data5.asin_done_c}} / {{ total_asin_allocated }}</a>
+
+        
       <a class="item" style="color:#ffffff;" href="{% url 'app:index' %}">
         <i class="power off icon" style="color:#ffffff;"></i></a>
+
+
 
 
     </div>

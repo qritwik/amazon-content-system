@@ -18,7 +18,7 @@
   <body style="background:#fafafa;">
 
 
-    <div class="ui attached menu" style="background:#f5f5f5; height:7%;">
+    <div class="ui positive menu" style="background:#fafafa; height:7%;">
   <div class="ui container">
     <a class="item" style="color:#212121;" href="{% url 'app:manager' %}">
       <i class="arrow left icon" style="color:#212121;"></i>
@@ -27,7 +27,7 @@
       <i class="home icon" style="color:#212121;"></i> Text Mercato
     </a>
     <a class="item" style="color:#212121;">
-      <i class="grid layout icon" style="color:#212121;"></i>Manager Dashboard - {{data3.name}}
+      <i class="grid layout icon" style="color:#212121;"></i>Admin Dashboard
     </a>
 
   </div>
@@ -50,23 +50,47 @@
 
 
 
-    <div class="ui container raised" style="margin-top:5.5%;">
+
+
+    <div class="ui container raised" style="margin-top:3.4%;">
+
+      <div class="ui breadcrumb">
+  <a class="section">Home</a>
+  <div class="divider"> / </div>
+  <a class="section" href="{% url 'app:manager' %}">Admin</a>
+  <div class="divider"> / </div>
+  <div class="active section">{{data3.name}}</div>
+</div>
+
+
+      <div class="ui teal message" style="margin-top:4%;">
+
+  <div class="header">
+    {{data3.name}}
+  </div>
+  <p>{{data3.email}} | {{data3.roles}}</p>
+</div>
 
 
 
     <div class="ui grid">
 
-      <h1>{{data3.name}}</h1>
 
 
 
-  <div class="twelve wide stretched column">
+  <div class="stretched column">
     <div class="ui segment">
 
       <div class="ui container">
 
-          <div class="ui three statistics">
-  <div class="statistic">
+          <div class="ui two statistics">
+
+
+
+
+
+
+  <div class="blue statistic">
     <div class="text value">
       {{done_asin}}/{{total_asin}}
     </div>
@@ -74,6 +98,9 @@
       No. of ASIN Submitted
     </div>
   </div>
+
+
+
 
 
 </div>
@@ -86,7 +113,7 @@
 
       <hr>
 
-      <table class="ui selectable celled table">
+      <table class="ui celled table">
     <thead>
       <tr>
         <th>Name</th>
@@ -111,6 +138,9 @@
 
     </tbody>
   </table>
+
+  <div class="ui section divider"></div>
+
 
   <form method="post">
     {% csrf_token %}

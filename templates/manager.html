@@ -18,13 +18,13 @@
   <body style="background:#fafafa;">
 
 
-    <div class="ui attached menu" style="background:#f5f5f5; height:7%;">
+    <div class="ui menu" style="background:#f5f5f5; height:7%;">
   <div class="ui container">
     <a class="item" style="color:#212121;">
       <i class="home icon" style="color:#212121;"></i> Text Mercato
     </a>
     <a class="item" style="color:#212121;">
-      <i class="grid layout icon" style="color:#212121;"></i>Manager Dashboard
+      <i class="grid layout icon" style="color:#212121;"></i>Admin Dashboard
     </a>
 
   </div>
@@ -47,11 +47,19 @@
 
 
 
-    <div class="ui container raised" style="margin-top:5.5%;">
+    <div class="ui container raised" style="margin-top:3.8%;">
+
+      <div class="ui breadcrumb">
+  <a class="section">Home</a>
+  <div class="divider"> / </div>
+
+  <div class="active section">Admin</div>
+</div>
 
 
 
-    <div class="ui grid">
+
+    <div class="ui grid" style="margin-top:2.2%;" >
 
       <div class="four wide column segment">
         <div class="ui large vertical menu">
@@ -78,7 +86,7 @@
       <div class="ui container">
 
           <div class="ui two statistics">
-  <div class="statistic">
+  <div class="blue statistic">
     <div class="text value">
       {{done_asin}}/{{total_asin}}
     </div>
@@ -87,7 +95,7 @@
     </div>
   </div>
 
-  <div class="statistic">
+  <div class="teal statistic">
     <div class="text value">
       {{asin_allocated}}/{{total_asin}}
     </div>
@@ -106,7 +114,7 @@
 
       <hr>
 
-      <table class="ui selectable celled table">
+      <table class="ui selectable teal celled table">
     <thead>
       <tr>
         <th>Name</th>
