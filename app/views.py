@@ -222,6 +222,10 @@ def manager(request):
     data4 = asinDetail.objects.filter(extracted=True)
     asin_fetch = data4.count()
 
+    data5 = asinDetail.objects.filter(~Q(email=""))
+    asin_allocated = data5.count()
+
+    
 
 
 
@@ -230,6 +234,7 @@ def manager(request):
 
     context = {
         'total_asin':total_asin,
+        'asin_allocated':asin_allocated,
         'done_asin':done_asin,
         'total_user':total_user,
         'asin_fetch':asin_fetch,
