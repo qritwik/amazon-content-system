@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class asinDetail(models.Model):
-    asin = models.CharField(max_length=100, blank=True, null=True)
+    asin = models.CharField(max_length=100, blank=True ,primary_key=True)
     status = models.BooleanField(default=False, blank=True)
     email = models.CharField(max_length=100, blank=True, null=True)
     extracted = models.BooleanField(default=False, blank=True)

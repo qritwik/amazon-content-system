@@ -40,7 +40,7 @@ def manager_user(request,email):
         user_asin_c = request.POST.get('user_asin')
         user_asin_c_n = int(user_asin_c)
 
-        data1 = asinDetail.objects.filter(status=False).filter(extracted=True).filter(email="")
+        data1 = asinDetail.objects.filter(status=False).filter(extracted=True).filter(email__isnull=True)
         for i1 in data1:
             if(c<user_asin_c_n):
                 i1.email = email
@@ -222,7 +222,7 @@ def manager(request):
     data4 = asinDetail.objects.filter(extracted=True)
     asin_fetch = data4.count()
 
-    data5 = asinDetail.objects.filter(~Q(email=""))
+    data5 = asinDetail.objects.filter(~Q(email__isnull=True))
     asin_allocated = data5.count()
 
 

@@ -68,6 +68,10 @@
           <div class="ui teal left label">{{done_asin}}</div>
         </a>
         <a class="teal item">
+          ASIN's Allocated
+          <div class="ui left label">{{asin_allocated}}</div>
+        </a>
+        <a class="teal item">
           Users
           <div class="ui label">{{total_user}}</div>
         </a>
@@ -85,22 +89,31 @@
 
       <div class="ui container">
 
-          <div class="ui two statistics">
+          <div class="ui three statistics">
   <div class="blue statistic">
     <div class="text value">
       {{done_asin}}/{{total_asin}}
     </div>
     <div class="label">
-      Total No. of ASIN Submitted
+      Total No. of ASIN Done
     </div>
   </div>
 
-  <div class="teal statistic">
+  <div class="statistic">
     <div class="text value">
       {{asin_allocated}}/{{total_asin}}
     </div>
     <div class="label">
       Total No. of ASIN Allocated
+    </div>
+  </div>
+
+  <div class="statistic">
+    <div class="text value">
+      {{asin_fetch}}/{{total_asin}}
+    </div>
+    <div class="label">
+      Total No. of ASIN Fetched
     </div>
   </div>
 
@@ -114,7 +127,7 @@
 
       <hr>
 
-      <table class="ui selectable teal celled table">
+      <table class="ui selectable celled table">
     <thead>
       <tr>
         <th>Name</th>

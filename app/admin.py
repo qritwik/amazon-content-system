@@ -14,8 +14,11 @@ admin.site.register(oldDetailAmazon)
 
 
 class asinDetailResource(resources.ModelResource):
-	class Meta:
-		model = asinDetail
+
+    class Meta:
+        model = asinDetail
+        import_id_fields = ('asin',)
+        fields = ('asin','status','email','extracted',)
 
 
 @admin.register(asinDetail)
