@@ -463,6 +463,7 @@ def detail(request):
                 #---->>>><<<<<-----#
                 form1 = forms.form_newProductDetail()
                 form2 = forms.form_oldProductDetail()
+                # form3 = forms.form_featureImage()
 
                 data4 = ast.literal_eval(data2.old_desc)
                 data7 = ast.literal_eval(data2.old_from_manufacture_h)
@@ -485,6 +486,7 @@ def detail(request):
                     'data4':data4,
                     'form1':form1,
                     'form2':form2,
+                    
                     'total_asin_allocated':total_asin_allocated,
                     'data5':data5,
                     'data7':data7,
@@ -496,6 +498,7 @@ def detail(request):
                     newtitle = request.POST.get('newtitle')
                     form1 = forms.form_newProductDetail(request.POST)
                     form2 = forms.form_oldProductDetail(request.POST)
+                    # form3 = forms.form_featureImage(request.POST)
                     sendme = asinDetail.objects.get(asin=asin)
                     sendme1 = oldDetailAmazon.objects.get(asin=asin)
 
@@ -507,10 +510,25 @@ def detail(request):
                         obj.save()
 
                         obj1 = form2.save(commit=False)
-                        obj1.asin=i
+                        obj1.asin=asin
                         obj1.current_Title=data2.old_name
                         obj1.revised_Title=form1.cleaned_data['title']
                         obj1.save()
+
+                        # obj2 = form3.save(commit=False)
+                        # obj2.asin=asin
+                        # hdmi = int(request.POST.get('hdmi'))
+                        # usb = int(request.POST.get('usb'))
+                        # vga = int(request.POST.get('vga'))
+                        # if(hdmi!=0 and usb==0 and vga==0):
+                        #     value3 = hdmi+" HDMI Ports"
+                        # elif(hdmi==0 and usb!=0 and vga==0):
+                        #     value3 = usb+" USB Ports"
+                        # elif(hdmi==0 and usb==0 and vga!=0):
+                        #     value3 = vga+" VGA Ports"
+                        # elif(hdmi!=0 and usb!=0 and vga==0):
+                        #     value3 = hdmi+" HDMI Ports |"+usb+" USB Ports"
+
 
                         data7 = empDetail.objects.get(email=email)
                         data7.asin_done_c = F('asin_done_c') + 1
