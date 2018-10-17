@@ -56,6 +56,9 @@ class oldDetailAmazon(models.Model):
     old_desc = models.CharField(max_length=100000, blank=True, null=True)
     old_brand = models.CharField(max_length=10000, blank=True, null=True)
     old_product_desc = models.CharField(max_length=100000, blank=True, null=True)
+    old_from_manufacture_h = models.CharField(max_length=1000000, blank=True, null=True)
+    old_from_manufacture_p = models.CharField(max_length=1000000, blank=True, null=True)
+
     asin = models.CharField(max_length=10000, blank=True, null=True)
     status = models.BooleanField(default=False)
 

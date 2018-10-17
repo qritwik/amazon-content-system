@@ -13,8 +13,7 @@ import ast
 from django.db.models import F
 from django.db.models import Q
 
-h=[]
-p=[]
+
 
 
 def manager_user(request,email):
@@ -100,6 +99,9 @@ def fetch_asin(request):
                     obj.old_desc = data4['DESC']
                     obj.old_brand = data4['BRAND']
                     obj.old_product_desc = data4['PRODUCT_DESC']
+                    obj.old_from_manufacture_h = data4['H1']
+                    obj.old_from_manufacture_p = data4['P1']
+
                     obj.asin = i
 
                     obj.save()
@@ -245,6 +247,10 @@ def manager(request):
 
 
 def parse(url):
+    h=[]
+    p=[]
+
+
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'}
     r = requests.get(url,headers=headers)
     for i in range(20):
@@ -299,15 +305,43 @@ def parse(url):
 
 
 
+            if soup.find('div',{'id':'aplus_feature_div'}):
+                data6 = soup.find('div',{'id':'aplus_feature_div'})
+                if data6.find('div',{'class':'a-section a-spacing-extra-large bucket'}):
+                    data7 = data6.find('div',{'class':'a-section a-spacing-extra-large bucket'})
+                    if data7.find('div',{'class':'aplus-v2 desktop celwidget'}):
+                        data8 = data7.find('div',{'class':'aplus-v2 desktop celwidget'})
+                        for data10 in data8.find_all('h4',{'class':'a-spacing-mini'}):
+                            h.append(data10.text)
+                        for data11 in data8.find_all('p',{'class':'a-size-small'}):
+                            p.append(data11.text)
 
-                # data5 = soup.find('div',{'id':'dpx-aplus-product-description_feature_div'})
-                # data6 = data5.find('div',{'id':'aplus_feature_div'})
-                # data7 = data6.find('div',{'class':'a-section a-spacing-extra-large bucket'})
-                # data8 = data7.find('div',{'class':'aplus-v2 desktop celwidget'})
-                # for data10 in data8.find_all('h4'):
-                #     h.append(data10.text)
-                # for data11 in data8.find_all('p'):
-                #     p.append(data11.text)
+
+
+            # if soup.find('div',{'id':'dpx-aplus-product-description_feature_div'}):
+            #     data5 = soup.find('div',{'id':'dpx-aplus-product-description_feature_div'})
+            #     if data5.find('div',{'id':'aplus_feature_div'}):
+            #         data6 = data5.find('div',{'id':'aplus_feature_div'})
+            #         if data6.find('div',{'class':'a-section a-spacing-extra-large bucket'}):
+            #             data7 = data6.find('div',{'class':'a-section a-spacing-extra-large bucket'})
+            #             if data7.find('div',{'class':'aplus-v2 desktop celwidget'}):
+            #                 data8 = data7.find('div',{'class':'aplus-v2 desktop celwidget'})
+            #                 for data10 in data8.find_all('h4',{'class':'a-spacing-mini'}):
+            #                     h.append(data10.text)
+            #                 for data11 in data8.find_all('p',{'class':'a-size-small'}):
+            #                     p.append(data11.text)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -324,7 +358,9 @@ def parse(url):
             if not NAME :
                 NAME=''
 
-            # over = zip(h,p)
+            print(h)
+
+            #over = zip(h,p)
 
             data = {
                     'NAME':NAME,
@@ -336,7 +372,8 @@ def parse(url):
                     'DESC':desc_list,
                     'BRAND':brand,
                     'PRODUCT_DESC':productDescription,
-                    # 'OVER':over
+                    'H1':h,
+                    'P1':p
                     }
 
             return data
@@ -428,6 +465,10 @@ def detail(request):
                 form2 = forms.form_oldProductDetail()
 
                 data4 = ast.literal_eval(data2.old_desc)
+                data7 = ast.literal_eval(data2.old_from_manufacture_h)
+                data8 = ast.literal_eval(data2.old_from_manufacture_p)
+
+                data9 = zip(data7,data8)
 
                 #---->>>><<<<<-----#
                 data5 = empDetail.objects.get(email=email)
@@ -445,7 +486,10 @@ def detail(request):
                     'form1':form1,
                     'form2':form2,
                     'total_asin_allocated':total_asin_allocated,
-                    'data5':data5
+                    'data5':data5,
+                    'data7':data7,
+                    'data8':data8,
+                    'data9':data9
 
                     }
                 if request.method == 'POST':

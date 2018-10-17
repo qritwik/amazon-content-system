@@ -80,7 +80,7 @@
  <div class="aligned row">
    <div class="column">
 <!--   ----------------------------  -->
-   <div class="ui container piled segment">
+   <div class="ui container stacked segment">
 
 <div class="ui top right attached blue label">Old description</div>
 <form class="ui form">
@@ -119,14 +119,20 @@
 <!-- </textarea> -->
 </div>
 
-<!-- <div class="ui section divider"></div> -->
+<div class="ui section divider"></div>
+<h3><label style="color:#424242;">From the manufacturer</label></h3>
+<div class="field">
+{% for h,p in data9 %}
+<ul>
 
-<!-- <div class="field">
-{% for h,p in OVER %}
-<h3><label style="color:#424242;">{{h}}</label></h3>
+<li>
+<h4><label style="color:#424242;">{{h}}</label></h4>
+</li>
 <p>{{p}}</p>
+
+</ul>
 {% endfor %}
-</div> -->
+</div>
 
 
 
@@ -141,7 +147,7 @@
    <div class="column">
      <!--   ----------------------------  -->
 
-           <div class="ui container piled segment">
+           <div class="ui container stacked segment">
      <div class="ui top right attached teal label">New description</div>
 
      <form class="ui form" method="post">
