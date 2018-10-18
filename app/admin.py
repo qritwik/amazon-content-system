@@ -17,7 +17,28 @@ admin.site.unregister(Group)
 
 
 admin.site.register(oldDetailAmazon)
-admin.site.register(featureImage)
+
+
+
+
+class featureImageResource(resources.ModelResource):
+
+    class Meta:
+        model = featureImage
+        exclude = ('id')
+
+
+
+@admin.register(featureImage)
+class featureImageForm(ImportExportModelAdmin):
+
+
+	resource_class = featureImageResource
+
+	def name(self, instance):
+		return instance.asin
+
+
 
 
 class asinDetailResource(resources.ModelResource):
