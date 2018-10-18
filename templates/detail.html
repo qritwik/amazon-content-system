@@ -72,7 +72,7 @@
 
 
 
-<div class="ui " style="margin-top:7%; margin-left: 2%; margin-right: 2%;">
+<div class="ui " style="margin-top:6%; margin-left: 1.5%; margin-right: 1.5%;">
 
 
    <div class="ui">
@@ -167,7 +167,7 @@
    <h4><label>Bullet Point 1 (Resolution and Refresh)</label></h4>
    <div class="three fields">
    <div class="field">
-     <input type="text" id="resolution" placeholder="Resolution:">
+     <input type="text" id="resolution" placeholder="Resolution:" name="resolution">
    </div>
    <div class="field">
      <input type="text" id="refresh" placeholder="Refresh Rate:">
@@ -247,13 +247,13 @@
    <h4><label>Bullet Point 4 (Ports Connectivity)</label></h4>
    <div class="three fields">
    <div class="field">
-     <input type="number" id="hdmi" placeholder="No. of HDMI Port:">
+     <input type="number" id="hdmi" name="hdmi1" placeholder="No. of HDMI Port:">
    </div>
    <div class="field">
-     <input type="number" id="usb" placeholder="No. of USB Port:">
+     <input type="number" id="usb" name="usb1" placeholder="No. of USB Port:">
    </div>
    <div class="field">
-     <input type="number" id="vga" placeholder="No. of VGA Port:">
+     <input type="number" id="vga" name="vga1" placeholder="No. of VGA Port:">
    </div>
  </div>
    {% render_field form1.bp4 class="form-control" placeholder="Connectivity: 2 HDMI ports to connect set top box, Blu Ray players, gaming console | 2 USB ports to connect hard drives and other USB devices | 1 VGA Port to connect laptops" id="bp4" %}
@@ -344,10 +344,79 @@
 
 
 
+ <div class="ui horizontal divider" style="margin-top:6%;">
+    Feature Image
+  </div>
+
+  <div class="field">
+    <h4><label>Screen size(Inches)</label></h4>
+    <input type="text" placeholder="36" name="screen">
+  </div>
+
+  <div class="field">
+    <h4><label>Display and Refresh rate</label></h4>
+    <div class="three fields">
+    <div class="field">
+  <input type="text" placeholder="LED Pannel" name="ds11">
+    </div>
+    <div class="field">
+      <input type="text" placeholder="" name="ds22">
+    </div>
+    <div class="field">
+      <input type="text" placeholder="Refresh Rate:" name="refresh">
+    </div>
+  </div>
+
+  </div>
+
+
+
+  <div class="field">
+    <h4><label>Sound output</label></h4>
+    <div class="three fields">
+    <div class="field">
+  <input type="text" placeholder="20W" name="s11">
+    </div>
+    <div class="field">
+      <input type="text" placeholder="Dolby Digital" name="s22">
+    </div>
+    <div class="field">
+      <input type="text" placeholder="" name="s33">
+    </div>
+    <div class="field">
+      <input type="text" placeholder="" name="s44">
+    </div>
+  </div>
+
+  </div>
+
+
+
+ <div class="field">
+   <h4><label>Smart TV Features</label></h4>
+   <div class="two fields">
+   <div class="dropdown field">
+     <select name="smart">
+  <option value="YES">YES</option>
+  <option value="NO" selected="selected">NO</option>
+
+</select>
+   </div>
+   <div class="field">
+     <input type="text" placeholder="In-built wifi (Android Nougat OS)" name="fist">
+   </div>
+ </div>
+
+ </div>
+
+
+
    </div>
 
    </div>
 <div class="ui center aligned container" style="margin:3%;">
+
+
  <div class="ui buttons btn1">
    <button type="submit" class="ui primary button" id="btnSubmit">Save and Continue</button>
    <div class="or"></div>
@@ -368,6 +437,8 @@
 
 </div>
 
+</div>
+
   <div class="ui inverted vertical footer raised segment" style="background:#e0e0e0;">
    <div class="ui center aligned container">
 
@@ -377,6 +448,13 @@
      </div>
    </div>
  </div>
+
+ <script type="text/javascript">
+
+ $('.ui.dropdown')
+  .dropdown();
+
+ </script>
 
 
 

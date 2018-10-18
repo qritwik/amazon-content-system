@@ -463,7 +463,7 @@ def detail(request):
                 #---->>>><<<<<-----#
                 form1 = forms.form_newProductDetail()
                 form2 = forms.form_oldProductDetail()
-                # form3 = forms.form_featureImage()
+                form3 = forms.form_featureImage()
 
                 data4 = ast.literal_eval(data2.old_desc)
                 data7 = ast.literal_eval(data2.old_from_manufacture_h)
@@ -486,7 +486,8 @@ def detail(request):
                     'data4':data4,
                     'form1':form1,
                     'form2':form2,
-                    
+                    'form3':form3,
+
                     'total_asin_allocated':total_asin_allocated,
                     'data5':data5,
                     'data7':data7,
@@ -498,13 +499,13 @@ def detail(request):
                     newtitle = request.POST.get('newtitle')
                     form1 = forms.form_newProductDetail(request.POST)
                     form2 = forms.form_oldProductDetail(request.POST)
-                    # form3 = forms.form_featureImage(request.POST)
+                    form3 = forms.form_featureImage(request.POST)
                     sendme = asinDetail.objects.get(asin=asin)
                     sendme1 = oldDetailAmazon.objects.get(asin=asin)
 
 
 
-                    if form1.is_valid() and form2.is_valid():
+                    if form1.is_valid() and form2.is_valid() and form3.is_valid():
                         obj = form1.save(commit=False)
                         obj.asin=asin
                         obj.save()
@@ -515,19 +516,147 @@ def detail(request):
                         obj1.revised_Title=form1.cleaned_data['title']
                         obj1.save()
 
-                        # obj2 = form3.save(commit=False)
-                        # obj2.asin=asin
-                        # hdmi = int(request.POST.get('hdmi'))
-                        # usb = int(request.POST.get('usb'))
-                        # vga = int(request.POST.get('vga'))
-                        # if(hdmi!=0 and usb==0 and vga==0):
-                        #     value3 = hdmi+" HDMI Ports"
-                        # elif(hdmi==0 and usb!=0 and vga==0):
-                        #     value3 = usb+" USB Ports"
-                        # elif(hdmi==0 and usb==0 and vga!=0):
-                        #     value3 = vga+" VGA Ports"
-                        # elif(hdmi!=0 and usb!=0 and vga==0):
-                        #     value3 = hdmi+" HDMI Ports |"+usb+" USB Ports"
+                        #--------->>>>>featureImage<<<<<<<<-----------
+
+                        obj2 = form3.save(commit=False)
+
+                        #---------ASIN----------------1
+                        obj2.asin=asin
+                        #=========ASIN-END=============
+
+
+                        #----------connectivity_ports-------------2
+                        hdmi = request.POST.get('hdmi1')
+                        usb = request.POST.get('usb1')
+                        vga = request.POST.get('vga1')
+
+                        if(hdmi!="" and usb=="" and vga==""):
+                            value3 = hdmi+" HDMI Ports"
+                        elif(hdmi=="" and usb!="" and vga==""):
+                            value3 = usb+" USB Ports"
+                        elif(hdmi=="" and usb=="" and vga!=""):
+                            value3 = vga+" VGA Ports"
+                        elif(hdmi!="" and usb!="" and vga==""):
+                            value3 = hdmi+" HDMI Ports |"+usb+" USB Ports"
+                        elif(hdmi!="" and usb=="" and vga!=""):
+                            value3 = hdmi+" HDMI Ports |"+vga+" VGA Ports"
+                        elif(hdmi=="" and usb!="" and vga!=""):
+                            value3 = usb+" USB Ports |"+vga+" VGA Ports"
+                        elif(hdmi!="" and usb!="" and vga!=""):
+                            value3 = hdmi+" HDMI Ports |"+usb+" USB Ports |"+vga+" VGA Ports"
+                        else:
+                            value3 = ""
+                        obj2.connectivity_ports=value3
+                        #==============connectivity_ports_END===============
+
+
+                        #-----------------sound_output---------------------3
+                        s1 = request.POST.get('s11')
+                        s2 = request.POST.get('s22')
+                        s3 = request.POST.get('s33')
+                        s4 = request.POST.get('s44')
+
+                        if(s1!="" and s2=="" and s3=="" and s4==""):
+                            value5 = s1
+                        elif(s1!="" and s2!="" and s3=="" and s4==""):
+                            value5 = s1+" with "+s2
+                        elif(s1!="" and s2!="" and s3!="" and s4==""):
+                            value5 = s1+" with "+s2+" ,"+s3
+                        elif(s1!="" and s2!="" and s3!="" and s4!=""):
+                            value5 = s1+" with "+s2+" ,"+s3+" ,"+s4
+                        
+                        else:
+                            value5 = ""
+                        obj2.sound_output=value5
+                        #=================sound_output_END====================
+
+
+
+                        #----------------display_and_refresh_rate---------------4
+                        ds1 = request.POST.get('ds11')
+                        ds2 = request.POST.get('ds22')
+                        ds3 = request.POST.get('ds3')
+                        ds4 = request.POST.get('ds4')
+                        ds5 = request.POST.get('ds5')
+                        rf = request.POST.get('refresh')
+
+                        if(ds1!="" and ds2=="" and rf==""):
+                            value4 = ds1
+                        elif(ds1!="" and ds2=="" and rf!=""):
+                            value4 = ds1+" | "+rf
+                        elif(ds1!="" and ds2!="" and rf==""):
+                            value4 = ds1+" | "+ds2
+                        elif(ds1!="" and ds2!="" and rf!=""):
+                            value4 = ds1+" | "+ds2+" | "+rf
+                        elif(ds1=="" and ds2=="" and rf==""):
+                            value4 = ""
+
+                        obj2.display_and_refresh_rate=value4
+                        #===============display_and_refresh_rate_END============
+
+
+                        #--------------screen_size_resolution-------------------5
+                        resolution = request.POST.get('resolution')
+                        screen_size = request.POST.get('screen')
+                        value2 = screen_size+" inches | "+resolution
+                        obj2.screen_size_resolution=value2
+                        #=============screen_size_resolution_END================
+
+
+
+                        #-------------warranty----------------6
+                        value7 = "Yes | Brand provided"
+                        obj2.warranty=value7
+                        #===========warranty-END==============
+
+
+
+                        #-------------smart_tv-----------------7
+                        smart = request.POST.get('smart')
+                        fist = request.POST.get('fist')
+                        if smart == "NO":
+                            value6 = "No"
+                        else:
+                            value6 = "Yes | "+fist
+                        obj2.smart_tv=value6
+                        #==============smart_tv=================7
+
+
+                        obj2.save()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        #=============>>>>>featureImageEnd<<<<<<<<=============
+
+
+
+
+
+
+
+
+
+
 
 
                         data7 = empDetail.objects.get(email=email)

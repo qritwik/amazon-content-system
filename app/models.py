@@ -10,6 +10,7 @@ class asinDetail(models.Model):
     def __str__(self):
 	    return self.asin
 
+# ===================================================
 
 class newProductDetail(models.Model):
     asin = models.CharField(max_length=10000, blank=True, null=True)
@@ -27,6 +28,7 @@ class newProductDetail(models.Model):
 
     def __str__(self):
 	    return self.asin
+# ===================================================
 
 
 class oldProductDetail(models.Model):
@@ -37,6 +39,7 @@ class oldProductDetail(models.Model):
 
     def __str__(self):
 	    return self.asin
+# ===================================================
 
 
 class empDetail(models.Model):
@@ -48,6 +51,7 @@ class empDetail(models.Model):
 
     def __str__(self):
 	    return self.email
+# ===================================================
 
 
 class oldDetailAmazon(models.Model):
@@ -61,6 +65,23 @@ class oldDetailAmazon(models.Model):
 
     asin = models.CharField(max_length=10000, blank=True, null=True)
     status = models.BooleanField(default=False)
+
+    def __str__(self):
+	    return self.asin
+
+
+
+# ===================================================
+
+
+class featureImage(models.Model):
+    asin = models.CharField(max_length=10000, blank=True, null=True)
+    screen_size_resolution = models.CharField(max_length=10000, blank=True, null=True)
+    connectivity_ports = models.CharField(max_length=10000, blank=True, null=True)
+    display_and_refresh_rate = models.CharField(max_length=10000, blank=True, null=True)
+    sound_output = models.CharField(max_length=10000, blank=True, null=True)
+    smart_tv = models.CharField(max_length=10000, blank=True, null=True)
+    warranty = models.CharField(max_length=10000, blank=True, null=True)
 
     def __str__(self):
 	    return self.asin

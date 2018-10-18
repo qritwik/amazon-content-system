@@ -27,3 +27,10 @@ class form_oldDetailAmazon(forms.ModelForm):
 	class Meta:
 		model = oldDetailAmazon
 		fields = '__all__'
+
+
+
+class form_featureImage(forms.ModelForm):
+	class Meta:
+		model = featureImage
+		fields = '__all__'

@@ -2,15 +2,22 @@ from django.contrib import admin
 from .models import *
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
+from django.contrib.auth.models import User, Group
 
 
 
 # Register your models here.
 
-admin.site.site_header = "Amazon ASIN System";
+admin.site.site_header = "Text Mercato ASIN Portal"
+admin.site.site_title = "Text Mercato ASIN Portal"
+admin.site.index_title = "Text Mercato ASIN Portal"
+admin.site.unregister(User)
+admin.site.unregister(Group)
+
 
 
 admin.site.register(oldDetailAmazon)
+admin.site.register(featureImage)
 
 
 class asinDetailResource(resources.ModelResource):
