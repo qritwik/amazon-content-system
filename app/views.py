@@ -564,7 +564,7 @@ def detail(request):
                             value5 = s1+" with "+s2+" ,"+s3
                         elif(s1!="" and s2!="" and s3!="" and s4!=""):
                             value5 = s1+" with "+s2+" ,"+s3+" ,"+s4
-                        
+
                         else:
                             value5 = ""
                         obj2.sound_output=value5

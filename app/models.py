@@ -14,14 +14,14 @@ class asinDetail(models.Model):
 
 class newProductDetail(models.Model):
     asin = models.CharField(max_length=10000, blank=True, null=True)
-    title = models.CharField(max_length=1000,blank=True, null=True)
-    bp1 = models.CharField(max_length=10000, blank=True, null=True)
-    bp2 = models.CharField(max_length=10000, blank=True, null=True)
+    title = models.CharField(max_length=1000, null=True)
+    bp1 = models.CharField(max_length=10000, null=True)
+    bp2 = models.CharField(max_length=10000, null=True)
     bp3 = models.CharField(max_length=10000, blank=True, null=True)
-    bp4 = models.CharField(max_length=10000, blank=True, null=True)
-    bp5 = models.CharField(max_length=10000, blank=True, null=True)
-    bp6 = models.CharField(max_length=10000, blank=True, null=True)
-    bp7 = models.CharField(max_length=10000, blank=True, null=True)
+    bp4 = models.CharField(max_length=10000, null=True)
+    bp5 = models.CharField(max_length=10000, null=True)
+    bp6 = models.CharField(max_length=10000, null=True)
+    bp7 = models.CharField(max_length=10000, null=True)
     bp8 = models.CharField(max_length=10000, blank=True, null=True)
     comments = models.CharField(max_length=10000, blank=True, null=True)
 

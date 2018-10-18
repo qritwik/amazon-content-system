@@ -22,6 +22,9 @@
 $('.ui.dropdown')
   .dropdown();
 
+
+
+
 </script>
 
 
@@ -67,6 +70,8 @@ $('.ui.dropdown')
 
 
 
+
+
     </div>
 
 </div>
@@ -85,7 +90,7 @@ $('.ui.dropdown')
  <div class="aligned row">
    <div class="column">
 <!--   ----------------------------  -->
-   <div class="ui container stacked segment">
+   <div class="ui container stacked segment" style="background:#fefefe;">
 
 <div class="ui top right attached blue label">Old description</div>
 <form class="ui form">
@@ -152,7 +157,7 @@ $('.ui.dropdown')
    <div class="column">
      <!--   ----------------------------  -->
 
-           <div class="ui container stacked segment">
+           <div class="ui container stacked segment" style="background:#fefefe;">
      <div class="ui top right attached teal label">New description</div>
 
      <form class="ui form" method="post">
@@ -161,21 +166,21 @@ $('.ui.dropdown')
 
  <div class="field">
 <!--       <a class="ui green ribbon label">New description</a>
--->      <h4><label style="margin-top:2%;">Title</label></h4>
-   {% render_field form1.title class="form-control" name="newtitle" placeholder="Samsung 59 cm (24 inches) HD Ready LED TV UA24J4100AR (Black) (2015 Model)" %}
+-->      <h4><label style="margin-top:2%;">Title<span style="color:red;"> *</span></label></h4>
+   {% render_field form1.title class="form-control" name="newtitle" placeholder="Samsung 59 cm (24 inches) HD Ready LED TV UA24J4100AR (Black) (2015 Model)"%}
 
  </div>
 
  <div class="ui section divider"></div>
 
  <div class="field">
-   <h4><label>Bullet Point 1 (Resolution and Refresh)</label></h4>
+   <h4><label>Bullet Point 1 (Resolution and Refresh)<span style="color:red;"> *</span></label></h4>
    <div class="three fields">
    <div class="field">
      <input type="text" id="resolution" placeholder="Resolution:" name="resolution">
    </div>
    <div class="field">
-     <input type="text" id="refresh" placeholder="Refresh Rate:">
+     <input type="text" id="refresh" placeholder="Refresh Rate:" name="refresh">
    </div>
    <div class="field">
      <input type="text" id="view" placeholder="Viewing angle:">
@@ -186,7 +191,7 @@ $('.ui.dropdown')
  </div>
  <div class="ui section divider"></div>
  <div class="field">
-   <h4><label>Bullet Point 2 (Display)</label></h4>
+   <h4><label>Bullet Point 2 (Display)<span style="color:red;"> *</span></label></h4>
    <div class="five fields">
    <div class="field">
      <input type="text" id="ds1" placeholder="">
@@ -249,7 +254,7 @@ $('.ui.dropdown')
 
 
  <div class="field">
-   <h4><label>Bullet Point 4 (Ports Connectivity)</label></h4>
+   <h4><label>Bullet Point 4 (Ports Connectivity)<span style="color:red;"> *</span></label></h4>
    <div class="three fields">
    <div class="field">
      <input type="number" id="hdmi" name="hdmi1" placeholder="No. of HDMI Port:">
@@ -266,7 +271,7 @@ $('.ui.dropdown')
  <div class="ui section divider"></div>
 
  <div class="field">
-   <h4><label>Bullet Point 5 (Sound)</label></h4>
+   <h4><label>Bullet Point 5 (Sound)<span style="color:red;"> *</span></label></h4>
    <div class="five fields">
    <div class="field">
      <input type="text" id="s1" placeholder="">
@@ -290,7 +295,7 @@ $('.ui.dropdown')
  <div class="ui section divider"></div>
 
  <div class="field">
-   <h4><label>Bullet Point 6 (Installation)</label></h4>
+   <h4><label>Bullet Point 6 (Installation)<span style="color:red;"> *</span></label></h4>
    <div class="two fields">
    <div class="field">
      <input type="text" id="brand6" placeholder="Sony" value="{{data2.old_brand}}" disabled>
@@ -305,7 +310,7 @@ $('.ui.dropdown')
  <div class="ui section divider"></div>
 
  <div class="field">
-   <h4><label>Bullet Point 7 (Warranty)</label></h4>
+   <h4><label>Bullet Point 7 (Warranty)<span style="color:red;"> *</span></label></h4>
    <div class="two fields">
    <div class="field">
      <input type="number" id="year" placeholder="Warranty Year">
@@ -348,28 +353,27 @@ $('.ui.dropdown')
  </div>
 
 
+<div class="ui piled segment" style="background:#fbfbfb;">
 
- <div class="ui horizontal divider" style="margin-top:6%;">
+ <div class="ui horizontal divider" style="margin-top:2%;">
     Feature Image
   </div>
 
   <div class="field">
-    <h4><label>Screen size(Inches)</label></h4>
-    <input type="text" placeholder="36" name="screen">
+    <h4><label>Screen size(Inches)<span style="color:red;"> *</span></label></h4>
+    <input type="text" placeholder="36" name="screen" required>
   </div>
 
   <div class="field">
-    <h4><label>Display and Refresh rate</label></h4>
-    <div class="three fields">
+    <h4><label>Display<span style="color:red;"> *</span></label></h4>
+    <div class="two fields">
     <div class="field">
-  <input type="text" placeholder="LED Pannel" name="ds11">
+  <input type="text" placeholder="LED Pannel" name="ds11" required>
     </div>
     <div class="field">
       <input type="text" placeholder="" name="ds22">
     </div>
-    <div class="field">
-      <input type="text" placeholder="Refresh Rate:" name="refresh">
-    </div>
+
   </div>
 
   </div>
@@ -377,10 +381,10 @@ $('.ui.dropdown')
 
 
   <div class="field">
-    <h4><label>Sound output</label></h4>
+    <h4><label>Sound output<span style="color:red;"> *</span></label></h4>
     <div class="three fields">
     <div class="field">
-  <input type="text" placeholder="20W" name="s11">
+  <input type="text" placeholder="20W" name="s11" required>
     </div>
     <div class="field">
       <input type="text" placeholder="Dolby Digital" name="s22">
@@ -398,13 +402,14 @@ $('.ui.dropdown')
 
 
  <div class="field">
-   <h4><label>Smart TV Features</label></h4>
+   <h4><label>Smart TV Features<span style="color:red;"> *</span></label></h4>
    <div class="two fields">
       <div class="field">
    <div class="dropdown field">
      <select name="smart" class="ui dropdown">
-  <option value="Yes">Yes</option>
-  <option value="No" selected="selected">No</option>
+       <option value="NO" selected="selected">No</option>
+  <option value="YES">Yes</option>
+
 
 </select>
    </div>
@@ -425,7 +430,7 @@ $('.ui.dropdown')
 
 
    </div>
-
+</div>
    </div>
 <div class="ui center aligned container" style="margin:3%;">
 
