@@ -17,7 +17,12 @@
 
   <script type="text/javascript" src={% static "js/detail.js" %}></script>
 
+<script type="text/javascript">
 
+$('.ui.dropdown')
+  .dropdown();
+
+</script>
 
 
 
@@ -395,13 +400,21 @@
  <div class="field">
    <h4><label>Smart TV Features</label></h4>
    <div class="two fields">
+      <div class="field">
    <div class="dropdown field">
-     <select name="smart">
-  <option value="YES">YES</option>
-  <option value="NO" selected="selected">NO</option>
+     <select name="smart" class="ui dropdown">
+  <option value="Yes">Yes</option>
+  <option value="No" selected="selected">No</option>
 
 </select>
    </div>
+
+
+
+ </div>
+
+
+
    <div class="field">
      <input type="text" placeholder="In-built wifi (Android Nougat OS)" name="fist">
    </div>
@@ -448,14 +461,6 @@
      </div>
    </div>
  </div>
-
- <script type="text/javascript">
-
- $('.ui.dropdown')
-  .dropdown();
-
- </script>
-
 
 
 
