@@ -76,6 +76,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Scraper.wsgi.application'
 
+FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
+                        "django_excel.TemporaryExcelFileUploadHandler")
+
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases

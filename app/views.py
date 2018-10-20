@@ -17,6 +17,145 @@ from openpyxl.styles import PatternFill
 from openpyxl.styles import Font, Color, Fill
 from openpyxl.cell import Cell
 from openpyxl.styles import colors
+import os
+from django.shortcuts import render_to_response
+from django.http import HttpResponseBadRequest
+from django import forms
+from django.template import RequestContext
+import django_excel as excel
+import xlwt
+from excel_response import ExcelResponse
+from openpyxl.writer.excel import save_virtual_workbook
+
+
+
+
+
+def download_report(request):
+    c1 = 0
+    c2 = 2
+    c3 = 3
+
+    book = Workbook()
+
+    sheet1 = book['Sheet']
+
+    book.create_sheet()
+    sheet2 = book['Sheet1']
+
+    book.create_sheet()
+    sheet3 = book['Sheet2']
+
+    sheet1.title = "Title"
+    sheet1.column_dimensions['A'].width = 18
+    sheet1.column_dimensions['B'].width = 70
+    sheet1.column_dimensions['C'].width = 70
+
+
+    sheet1['A1'] = "ASIN"
+    sheet1['B1'] = "Current Title"
+    sheet1['C1'] = "Revised Title"
+
+    data7 = oldProductDetail.objects.all()
+    for row1 in data7:
+        sheet1['A'+str(c2)] = row1.asin
+        sheet1['B'+str(c2)] = row1.current_Title
+        sheet1['C'+str(c2)] = row1.revised_Title
+        c2 = c2 + 1
+
+
+
+
+    sheet2.title = "Bullet points"
+    sheet2.column_dimensions['A'].width = 18
+    sheet2.column_dimensions['B'].width = 70
+    sheet2.column_dimensions['C'].width = 70
+    sheet2.column_dimensions['D'].width = 70
+    sheet2.column_dimensions['E'].width = 70
+    sheet2.column_dimensions['F'].width = 70
+    sheet2.column_dimensions['G'].width = 70
+    sheet2.column_dimensions['H'].width = 70
+    sheet2.column_dimensions['I'].width = 70
+    sheet2.column_dimensions['J'].width = 70
+    sheet2.column_dimensions['K'].width = 70
+
+
+
+
+
+
+    sheet2['A1'] = "ASIN"
+    sheet2['B1'] = "Title"
+
+    sheet2['C1'] = "Bullet Point 1 (Resolution and Refresh)"
+    sheet2['D1'] = "Bullet Point 2 (Display)"
+    sheet2['E1'] = "Bullet Point 3 (Smart TV Features) Optional"
+    sheet2['F1'] = "Bullet Point 4 (Ports Connectivity)"
+    sheet2['G1'] = "Bullet Point 5 (Sound)"
+    sheet2['H1'] = "Bullet Point 6 (Installation)"
+    sheet2['I1'] = "Bullet Point 7 (Warranty)"
+    sheet2['J1'] = "Bullet Point 8 (Additional Information) Optional"
+    sheet2['K1'] = "Comments"
+    data8 = newProductDetail.objects.all()
+    for row2 in data8:
+        sheet2['A'+str(c3)] = row2.asin
+        sheet2['B'+str(c3)] = row2.title
+        sheet2['C'+str(c3)] = row2.bp1
+        sheet2['D'+str(c3)] = row2.bp2
+        sheet2['E'+str(c3)] = row2.bp3
+        sheet2['F'+str(c3)] = row2.bp4
+        sheet2['G'+str(c3)] = row2.bp5
+        sheet2['H'+str(c3)] = row2.bp6
+        sheet2['I'+str(c3)] = row2.bp7
+        sheet2['J'+str(c3)] = row2.bp8
+        sheet2['K'+str(c3)] = row2.comments
+
+        c3=c3+1
+
+
+
+
+
+
+
+
+
+
+    sheet3.title = "Feature Image"
+    sheet3.column_dimensions['A'].width = 30
+    sheet3.column_dimensions['B'].width = 48
+    sheet3['B1'] = "TV Features"
+    ft = Font(color=colors.WHITE,bold=True)
+    sheet3['B1'].font=ft
+    sheet3['A1'].fill = PatternFill(bgColor="00000000", fill_type = "solid")
+    sheet3['B1'].fill = PatternFill(bgColor="00000000", fill_type = "solid")
+    data6 = featureImage.objects.all()
+    for row in data6:
+
+
+        sheet3['A'+str(eval("2+c1*9"))] = row.asin
+        sheet3['A'+str(eval("3+c1*9"))] = "Screen size & Resolution"
+        sheet3['B'+str(eval("3+c1*9"))] = row.screen_size_resolution
+        sheet3['A'+str(eval("4+c1*9"))] = "Connectivity ports"
+        sheet3['B'+str(eval("4+c1*9"))] = row.connectivity_ports
+        sheet3['A'+str(eval("5+c1*9"))] = "Display and Refresh rate"
+        sheet3['B'+str(eval("5+c1*9"))] = row.display_and_refresh_rate
+        sheet3['A'+str(eval("6+c1*9"))] = "Sound output"
+        sheet3['B'+str(eval("6+c1*9"))] = row.sound_output
+        sheet3['A'+str(eval("7+c1*9"))] = "Smart TV"
+        sheet3['B'+str(eval("7+c1*9"))] = row.smart_tv
+        sheet3['A'+str(eval("8+c1*9"))] = "Warranty*"
+        sheet3['B'+str(eval("8+c1*9"))] = row.warranty
+        sheet3['A'+str(eval("9+c1*9"))] = "*Please check warranty information box below for details on warranty"
+
+        c1=c1+1
+
+    response = HttpResponse(save_virtual_workbook(book), content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="final_report.xlsx"'
+    return response
+
+
+
 
 
 
@@ -217,9 +356,7 @@ def index(request):
 
 
 def manager(request):
-    c1 = 0
-    c2 = 2
-    c3 = 3
+
     data1 = asinDetail.objects.all()
     total_asin = data1.count()
 
@@ -235,123 +372,7 @@ def manager(request):
     data5 = asinDetail.objects.filter(~Q(email__isnull=True))
     asin_allocated = data5.count()
 
-    if(request.method == 'POST'):
 
-
-        book = Workbook()
-        sheet1 = book['Sheet']
-
-        book.create_sheet()
-        sheet2 = book['Sheet1']
-
-        book.create_sheet()
-        sheet3 = book['Sheet2']
-
-        sheet1.title = "Title"
-        sheet1.column_dimensions['A'].width = 18
-        sheet1.column_dimensions['B'].width = 70
-        sheet1.column_dimensions['C'].width = 70
-
-
-        sheet1['A1'] = "ASIN"
-        sheet1['B1'] = "Current Title"
-        sheet1['C1'] = "Revised Title"
-
-        data7 = oldProductDetail.objects.all()
-        for row1 in data7:
-            sheet1['A'+str(c2)] = row1.asin
-            sheet1['B'+str(c2)] = row1.current_Title
-            sheet1['C'+str(c2)] = row1.revised_Title
-            c2 = c2 + 1
-
-
-
-
-        sheet2.title = "Bullet points"
-        sheet2.column_dimensions['A'].width = 18
-        sheet2.column_dimensions['B'].width = 70
-        sheet2.column_dimensions['C'].width = 70
-        sheet2.column_dimensions['D'].width = 70
-        sheet2.column_dimensions['E'].width = 70
-        sheet2.column_dimensions['F'].width = 70
-        sheet2.column_dimensions['G'].width = 70
-        sheet2.column_dimensions['H'].width = 70
-        sheet2.column_dimensions['I'].width = 70
-        sheet2.column_dimensions['J'].width = 70
-        sheet2.column_dimensions['K'].width = 70
-        
-
-
-
-
-
-        sheet2['A1'] = "ASIN"
-        sheet2['B1'] = "Title"
-
-        sheet2['C1'] = "Bullet Point 1 (Resolution and Refresh)"
-        sheet2['D1'] = "Bullet Point 2 (Display)"
-        sheet2['E1'] = "Bullet Point 3 (Smart TV Features) Optional"
-        sheet2['F1'] = "Bullet Point 4 (Ports Connectivity)"
-        sheet2['G1'] = "Bullet Point 5 (Sound)"
-        sheet2['H1'] = "Bullet Point 6 (Installation)"
-        sheet2['I1'] = "Bullet Point 7 (Warranty)"
-        sheet2['J1'] = "Bullet Point 8 (Additional Information) Optional"
-        sheet2['K1'] = "Comments"
-        data8 = newProductDetail.objects.all()
-        for row2 in data8:
-            sheet2['A'+str(c3)] = row2.asin
-            sheet2['B'+str(c3)] = row2.title
-            sheet2['C'+str(c3)] = row2.bp1
-            sheet2['D'+str(c3)] = row2.bp2
-            sheet2['E'+str(c3)] = row2.bp3
-            sheet2['F'+str(c3)] = row2.bp4
-            sheet2['G'+str(c3)] = row2.bp5
-            sheet2['H'+str(c3)] = row2.bp6
-            sheet2['I'+str(c3)] = row2.bp7
-            sheet2['J'+str(c3)] = row2.bp8
-            sheet2['K'+str(c3)] = row2.comments
-
-            c3=c3+1
-
-
-
-
-
-
-
-
-
-
-        sheet3.title = "Feature Image"
-        sheet3.column_dimensions['A'].width = 30
-        sheet3.column_dimensions['B'].width = 48
-        sheet3['B1'] = "TV Features"
-        ft = Font(color=colors.WHITE,bold=True)
-        sheet3['B1'].font=ft
-        sheet3['A1'].fill = PatternFill(bgColor="00000000", fill_type = "solid")
-        sheet3['B1'].fill = PatternFill(bgColor="00000000", fill_type = "solid")
-        data6 = featureImage.objects.all()
-        for row in data6:
-
-
-            sheet3['A'+str(eval("2+c1*9"))] = row.asin
-            sheet3['A'+str(eval("3+c1*9"))] = "Screen size & Resolution"
-            sheet3['B'+str(eval("3+c1*9"))] = row.screen_size_resolution
-            sheet3['A'+str(eval("4+c1*9"))] = "Connectivity ports"
-            sheet3['B'+str(eval("4+c1*9"))] = row.connectivity_ports
-            sheet3['A'+str(eval("5+c1*9"))] = "Display and Refresh rate"
-            sheet3['B'+str(eval("5+c1*9"))] = row.display_and_refresh_rate
-            sheet3['A'+str(eval("6+c1*9"))] = "Sound output"
-            sheet3['B'+str(eval("6+c1*9"))] = row.sound_output
-            sheet3['A'+str(eval("7+c1*9"))] = "Smart TV"
-            sheet3['B'+str(eval("7+c1*9"))] = row.smart_tv
-            sheet3['A'+str(eval("8+c1*9"))] = "Warranty*"
-            sheet3['B'+str(eval("8+c1*9"))] = row.warranty
-            sheet3['A'+str(eval("9+c1*9"))] = "*Please check warranty information box below for details on warranty"
-
-            c1=c1+1
-
-        book.save("Amazon.xlsx")
 
 
 

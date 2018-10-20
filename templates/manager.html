@@ -80,13 +80,13 @@
           <div class="ui label">{{asin_fetch}}</div>
         </a>
 
+        <a class="teal item" href="{% url 'app:download_report' %}">
+          Final Report
+          <div class="ui label">{{done_asin}}</div>
+        </a>
 
 
-        <form method="post">
-          {% csrf_token %}
-          <button type="submit" class="ui black basic button fluid"><div class="ui right">Final Report</div></button>
 
-        </form>
 
 
 
