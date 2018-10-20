@@ -20,7 +20,6 @@ from openpyxl.styles import colors
 import os
 from django.shortcuts import render_to_response
 from django.http import HttpResponseBadRequest
-from django import forms
 from django.template import RequestContext
 import django_excel as excel
 import xlwt
