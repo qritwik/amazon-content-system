@@ -81,6 +81,15 @@
         </a>
 
 
+
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="ui black basic button fluid"><div class="ui right">Final Report</div></button>
+
+        </form>
+
+
+
       </div>
  </div>
 
@@ -148,11 +157,9 @@
 
     </tbody>
   </table>
-<form method="post">
-  {% csrf_token %}
-  <input type="submit" name="" value="Final Report">
 
-</form>
+
+
     </div>
 
 

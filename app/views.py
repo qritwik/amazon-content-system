@@ -13,6 +13,10 @@ import ast
 from django.db.models import F
 from django.db.models import Q
 from openpyxl import Workbook
+from openpyxl.styles import PatternFill
+from openpyxl.styles import Font, Color, Fill
+from openpyxl.cell import Cell
+from openpyxl.styles import colors
 
 
 
@@ -244,6 +248,11 @@ def manager(request):
         sheet3 = book['Sheet2']
 
         sheet1.title = "Title"
+        sheet1.column_dimensions['A'].width = 18
+        sheet1.column_dimensions['B'].width = 70
+        sheet1.column_dimensions['C'].width = 70
+
+
         sheet1['A1'] = "ASIN"
         sheet1['B1'] = "Current Title"
         sheet1['C1'] = "Revised Title"
@@ -259,6 +268,23 @@ def manager(request):
 
 
         sheet2.title = "Bullet points"
+        sheet2.column_dimensions['A'].width = 18
+        sheet2.column_dimensions['B'].width = 70
+        sheet2.column_dimensions['C'].width = 70
+        sheet2.column_dimensions['D'].width = 70
+        sheet2.column_dimensions['E'].width = 70
+        sheet2.column_dimensions['F'].width = 70
+        sheet2.column_dimensions['G'].width = 70
+        sheet2.column_dimensions['H'].width = 70
+        sheet2.column_dimensions['I'].width = 70
+        sheet2.column_dimensions['J'].width = 70
+        sheet2.column_dimensions['K'].width = 70
+        
+
+
+
+
+
         sheet2['A1'] = "ASIN"
         sheet2['B1'] = "Title"
 
@@ -297,7 +323,13 @@ def manager(request):
 
 
         sheet3.title = "Feature Image"
+        sheet3.column_dimensions['A'].width = 30
+        sheet3.column_dimensions['B'].width = 48
         sheet3['B1'] = "TV Features"
+        ft = Font(color=colors.WHITE,bold=True)
+        sheet3['B1'].font=ft
+        sheet3['A1'].fill = PatternFill(bgColor="00000000", fill_type = "solid")
+        sheet3['B1'].fill = PatternFill(bgColor="00000000", fill_type = "solid")
         data6 = featureImage.objects.all()
         for row in data6:
 
@@ -319,7 +351,7 @@ def manager(request):
 
             c1=c1+1
 
-        book.save("featureImage.xlsx")
+        book.save("Amazon.xlsx")
 
 
 
