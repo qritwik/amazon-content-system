@@ -639,6 +639,7 @@ def detail(request):
                     'form1':form1,
                     'form2':form2,
                     'form3':form3,
+                    'data6':data6,
 
                     'total_asin_allocated':total_asin_allocated,
                     'data5':data5,

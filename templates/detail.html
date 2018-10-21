@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <title>Product detail</title>
 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">
    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
@@ -21,6 +23,7 @@
 
 $('.ui.dropdown')
   .dropdown();
+
 
 
 
@@ -66,6 +69,9 @@ $('.ui.dropdown')
 
       <a class="item" style="color:#ffffff;" href="{% url 'app:index' %}">
         <i class="power off icon" style="color:#ffffff;"></i></a>
+
+        <a onclick="document.getElementById('id01').style.display='block'" class="item" style="color:#ffffff;">Show Status</a>
+
 
 
 
@@ -457,6 +463,51 @@ $('.ui.dropdown')
 
 </div>
 
+
+
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-card-4">
+      <header class="" style="margin-bottom:2%;">
+        <span onclick="document.getElementById('id01').style.display='none'"
+        class="w3-button w3-display-topright">&times;</span>
+
+      </header>
+
+        <table class="ui celled table" style="margin-top:2%;" style="margin-bottom:2%;">
+        <thead>
+          <tr>
+              <th>S No.</th>
+            <th>ASIN Allocated</th>
+
+          <th>Status</th>
+        </tr></thead>
+        <tbody>
+          {% for i in data6 %}
+          <tr>
+              <td data-label="ASIN">{{forloop.counter}}</td>
+
+            <td data-label="ASIN">{{i.asin}}</td>
+
+            {% if i.status %}
+            <td data-label="Status" class="center aligned positive"><i class="large green checkmark icon"></i></td>
+            {% else %}
+            <td data-label="Status" class="negative"></td>
+            {% endif %}
+
+          </tr>
+
+          {% endfor %}
+
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+
+
+
   <div class="ui inverted vertical footer raised segment" style="background:#e0e0e0;">
    <div class="ui center aligned container">
 
@@ -466,6 +517,8 @@ $('.ui.dropdown')
      </div>
    </div>
  </div>
+
+
 
 
 
