@@ -29,7 +29,7 @@ SECRET_KEY = '7jo^ua#9k5p4(ff0^2p1v)24av1rj(z_p8^zzo@jhaw3ebic^q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -85,10 +85,24 @@ FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ddi2bqcpsr0djg',
+        'USER': 'zwjlauguqzsazu',
+        'PASSWORD': '85556dabf233dc4b563e4a3f05d868cd112ffe45073501444fb3dad1d558ec8b',
+        'HOST': 'ec2-54-221-237-246.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
