@@ -29,7 +29,7 @@ SECRET_KEY = '7jo^ua#9k5p4(ff0^2p1v)24av1rj(z_p8^zzo@jhaw3ebic^q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://text-mercato.herokuapp.com/']
 
 
 # Application definition
